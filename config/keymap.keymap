@@ -1,44 +1,52 @@
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+
+#define DEFAULT 0
+#define SHIFT   1
+#define BS_LYR  2
+#define ENT_LYR 3
 
 / {
     keymap {
         compatible = "zmk,keymap";
 
-        layer_0 {
-            bindings =<
-                &none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none
+        // Layer 0: Default
+        default_layer {
+            bindings = <
+                &kp LWIN  &kp Q  &kp Z  &kp COMMA &kp DOT   &kp QMARK &kp X  &kp W  &kp R  &kp Y  &kp P  &kp RWIN
+                &kp LSHFT &kp E  &kp I  &kp O     &kp A     &kp U     &kp K  &kp T  &kp N  &kp S  &kp H  &kp RSHFT
+                &kp LCTRL &kp C  &kp L  &kp V     &kp MINUS &kp F     &kp G  &kp D  &kp M  &kp J  &kp B  &kp RCTRL
+                &kp LALT  &mo 1  &kp LANG2 &kp TAB &kp SPACE &lt BS_LYR BSPC &lt ENT_LYR RET &kp LANG1 &mo 1 &kp RALT
             >;
         };
 
-        layer_1 {
-            bindings =<
-                &none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none
+        // Layer 1: Shift-like Layer (Manual Fn)
+        shift_layer {
+            bindings = <
+                &kp LWIN  &kp LS(Q) &kp LS(Z) &kp LPAR  &kp RPAR  &kp EXCL  &kp LS(X) &kp LS(W) &kp LS(R) &kp LS(Y) &kp LS(P) &kp RWIN
+                &kp LSHFT &kp LS(E) &kp LS(I) &kp LS(O) &kp LS(A) &kp LS(U) &kp LS(K) &kp LS(T) &kp LS(N) &kp LS(S) &kp LS(H) &kp RSHFT
+                &kp LCTRL &kp LS(C) &kp LS(L) &kp LS(V) &kp EQUAL &kp LS(F) &kp LS(G) &kp LS(D) &kp LS(M) &kp LS(J) &kp LS(B) &kp RCTRL
+                &kp LALT  &none     &trans    &trans    &trans    &trans    &trans    &trans    &none     &kp RALT
             >;
         };
 
-        layer_2 {
-            bindings =<
-                &none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none
+        // Layer 2: BS Hold Layer
+        bs_hold_layer {
+            bindings = <
+                &kp LWIN  &kp SLASH    &kp LBRC  &kp RBRC  &kp ASTRK  &none  &kp INS    &kp PG_UP  &kp UP    &kp PG_DN  &kp HOME  &kp RWIN
+                &kp LSHFT &kp PIPE     &kp LBKT  &kp RBKT  &kp PLUS   &none  &kp DEL    &kp LEFT   &kp DOWN  &kp RIGHT  &kp END   &kp RSHFT
+                &kp LCTRL &kp BSLH     &kp LT    &kp GT    &kp PRCNT  &none  &none      &kp C_PREV &kp C_PP  &kp C_NEXT &none     &kp RCTRL
+                &kp LALT  &trans       &trans    &trans    &trans     &trans &trans     &trans     &trans    &kp RALT
             >;
         };
 
-        layer_3 {
-            bindings =<
-                &none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none &none &none
-				&none &none &none &none &none &none &none &none &none &none
+        // Layer 3: Ent Hold Layer
+        ent_hold_layer {
+            bindings = <
+                &kp LWIN  &kp TILDE &kp UNDER &kp AMPS  &kp DLLR  &none  &none  &kp F1  &kp F2   &kp F3   &kp F4	&kp RWIN
+                &kp LSHFT &kp SEMI  &kp COLON &kp DQT   &kp SQT   &none  &none  &kp F5  &kp F6   &kp F7   &kp F8	&kp RSHFT
+                &kp LCTRL &kp AT    &kp HASH  &kp CARET &kp GRAVE &none  &none  &kp F9  &kp F10  &kp F11  &kp F12  &kp RCTRL
+                &kp LALT  &trans    &trans    &trans    &trans    &trans &trans  &trans   &trans   &kp RALT
             >;
         };
     };
