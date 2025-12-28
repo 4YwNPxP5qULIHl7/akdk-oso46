@@ -1,19 +1,27 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-/* JIS配列用マッピング定義 (OSがJIS設定の時に意図した文字を出すための定義) */
-#define JIS_AT      LBKT          // @
-#define JIS_LBKT    RBKT          // [
-#define JIS_RBKT    NON_US_HASH   // ]
-#define JIS_COLON   SQT           // :
-#define JIS_SCOLON  SEMI          // ;
-#define JIS_HAT     EQUAL         // ^
-#define JIS_YEN     INT3          // ¥
-#define JIS_PIPE    LS(INT3)      // |
-#define JIS_CIRC    EQUAL         // ^
-#define JIS_UNDER   LS(INT1)      // _
-#define JIS_LBRC    LS(RBKT)      // {
-#define JIS_RBRC    LS(NON_US_HASH) // }
+/* JIS配列用 記号変換定義 */
+#define JA_AT    LBKT              // @
+#define JA_LBKT  RBKT              // [
+#define JA_RBKT  NON_US_HASH       // ]
+#define JA_COLON SQT               // :
+#define JA_SCLN  SEMI              // ;
+#define JA_HAT   EQUAL             // ^
+#define JA_YEN   INT3              // ¥
+#define JA_PIPE  LS(INT3)          // |
+#define JA_TILDE LS(EQUAL)         // ~
+#define JA_UNDER LS(INT1)          // _
+#define JA_AMPS  LS(N6)            // &
+#define JA_DLLR  LS(N4)            // $
+#define JA_DQUOT LS(N2)            // "
+#define JA_SQUOT LS(N7)            // '
+#define JA_LBRC  LS(RBKT)          // {
+#define JA_RBRC  LS(NON_US_HASH)   // }
+#define JA_AST   LS(SQT)           // *
+#define JA_PLUS  LS(SEMI)          // +
+#define JA_GRV   LS(LBKT)          // `
+#define JA_HASH  LS(N3)            // #
 
 / {
     behaviors {
@@ -29,7 +37,7 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // Layer 0: Default (QWERTY/Custom)
+        // Layer 0: Default
         default_layer {
             bindings = <
                 &kp LWIN      &kp Q     &kp Z     &kp COMMA &kp DOT   &kp SLASH  &kp X     &kp W     &kp R     &kp Y     &kp P     &kp RWIN
@@ -39,27 +47,27 @@
             >;
         };
 
-        // Layer 1: Symbols & Navigation (Bs Hold)
+        // Layer 1: Symbols (Bs Hold)
         bs_layer {
             bindings = <
-                &kp LWIN      &kp SLASH     &kp JIS_LBRC  &kp JIS_RBRC  &kp LS(N8)    &none      &kp INS   &kp PG_UP &kp UP    &kp PG_DN &kp HOME  &kp RWIN
-                &kp LSHFT     &kp JIS_PIPE  &kp JIS_LBKT  &kp JIS_RBKT  &kp LS(SCLN)  &none      &kp DEL   &kp LEFT  &kp DOWN  &kp RIGHT &kp END   &kp RSHFT
-                &kp LCTRL     &kp JIS_YEN   &kp LS(COMMA) &kp LS(DOT)   &kp LS(N5)    &none      &none     &kp C_PREV &kp C_PP &kp C_NEXT &none    &kp RCTRL
+                &kp LWIN      &kp SLASH     &kp JA_LBRC   &kp JA_RBRC   &kp JA_AST    &none      &kp INS   &kp PG_UP &kp UP    &kp PG_DN &kp HOME  &kp RWIN
+                &kp LSHFT     &kp JA_PIPE   &kp JA_LBKT   &kp JA_RBKT   &kp JA_PLUS   &none      &kp DEL   &kp LEFT  &kp DOWN  &kp RIGHT &kp END   &kp RSHFT
+                &kp LCTRL     &kp JA_YEN    &kp LS(COMMA) &kp LS(DOT)   &kp LS(N5)    &none      &none     &kp C_PREV &kp C_PP &kp C_NEXT &none    &kp RCTRL
                 &kp LALT      &trans        &trans        &trans        &trans        &trans     &trans    &trans    &trans    &kp RALT
             >;
         };
 
-        // Layer 2: Symbols & F-Keys (Ent Hold)
+        // Layer 2: Symbols (Ent Hold)
         ent_layer {
             bindings = <
-                &kp LWIN      &kp LS(JIS_HAT) &kp JIS_UNDER &kp LS(N6)    &kp LS(N4)    &none      &none     &kp F1    &kp F2    &kp F3    &kp F4    &kp RWIN
-                &kp LSHFT     &kp JIS_SCOLON  &kp JIS_COLON &kp LS(N2)    &kp LS(N7)    &none      &none     &kp F5    &kp F6    &kp F7    &kp F8    &kp RSHFT
-                &kp LCTRL     &kp JIS_AT      &kp LS(N3)    &kp JIS_HAT   &kp LS(SQT)   &none      &none     &kp F9    &kp F10   &kp F11   &kp F12   &kp RCTRL
-                &kp LALT      &trans          &trans        &trans        &trans        &trans     &trans    &trans    &trans    &kp RALT
+                &kp LWIN      &kp JA_TILDE  &kp JA_UNDER  &kp JA_AMPS   &kp JA_DLLR   &none      &none     &kp F1    &kp F2    &kp F3    &kp F4    &kp RWIN
+                &kp LSHFT     &kp JA_SCLN   &kp JA_COLON  &kp JA_DQUOT  &kp JA_SQUOT  &none      &none     &kp F5    &kp F6    &kp F7    &kp F8    &kp RSHFT
+                &kp LCTRL     &kp JA_AT     &kp JA_HASH   &kp JA_HAT    &kp JA_GRV    &none      &none     &kp F9    &kp F10   &kp F11   &kp F12   &kp RCTRL
+                &kp LALT      &trans        &trans        &trans        &trans        &trans     &trans    &trans    &trans    &kp RALT
             >;
         };
 
-        // Layer 3: Fn & System (Space Hold)
+        // Layer 3: Fn & Number (Space/Fn Hold)
         sp_layer {
             bindings = <
                 &kp LWIN      &kp ESC       &kp CAPS      &kp C_BRI_UP  &kp C_VOL_UP  &none      &none     &kp N1    &kp N2    &kp N3    &none     &kp RWIN
