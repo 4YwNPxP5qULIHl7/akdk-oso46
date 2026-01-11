@@ -75,6 +75,7 @@
     keymap {
         compatible = "zmk,keymap";
 
+        // 0: Default
         default_layer {
             bindings = <
 &none  &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp JA_QUES   &kp X      &kp W      &kp R      &kp Y      &kp P      &none
@@ -84,6 +85,7 @@
             >;
         };
 
+        // 1: Shift (Mapped by 16 or 19 Hold)
         shift_layer {
             bindings = <
 &none  &kp LS(Q)  &kp LS(Z)  &kp JA_SQUOT &kp JA_DQUOT &kp JA_EXCL &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
@@ -93,6 +95,7 @@
             >;
         };
 
+        // 2: QWERTY
         qwerty_layer {
             bindings = <
 &none  &kp Q      &kp W      &kp E      &kp R      &kp T         &kp Y      &kp U      &kp I      &kp O      &kp P      &none
@@ -102,6 +105,7 @@
             >;
         };
 
+        // 3: QWERTY Shift
         qwerty_shift_layer {
             bindings = <
 &none  &kp LS(Q)  &kp LS(W)  &kp LS(E)  &kp LS(R)  &kp LS(T)     &kp LS(Y)  &kp LS(U)  &kp LS(I)  &kp LS(O)  &kp LS(P)  &none
@@ -111,6 +115,7 @@
             >;
         };
 
+        // 4: Numbers (Space Hold)
         num_layer {
             bindings = <
 &none  &kp JA_AT  &kp JA_LT  &kp JA_GT  &kp SLASH  &kp JA_YEN    &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
@@ -120,6 +125,7 @@
             >;
         };
 
+        // 5: Arrows & Symbols (BS Hold)
         arr_layer {
             bindings = <
 &none  &kp JA_HASH &kp JA_LBKT &kp JA_RBKT &kp JA_AMPS &kp JA_PIPE &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
@@ -129,6 +135,7 @@
             >;
         };
 
+        // 6: System (Space + BS Hold)
         system_layer {
             bindings = <
 &none  &kp K_APP  &kp K_CONV &kp C_BRI_UP &kp C_VOL_UP &kp F11     &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
