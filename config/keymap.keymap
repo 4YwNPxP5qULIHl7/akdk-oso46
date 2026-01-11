@@ -1,6 +1,5 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/bt.h>
 
 // レイヤー定義
 #define L_DEF 0
@@ -11,8 +10,37 @@
 #define L_ARR 5
 #define L_SYS 6
 
+// JIS記号のためのエイリアス設定 (USキーコードをJISとして解釈)
+#define JIS_AT    &kp LBKT      // @
+#define JIS_LT    &kp LS(COMMA) // <
+#define JIS_GT    &kp LS(DOT)   // >
+#define JIS_SLASH &kp SLASH     // /
+#define JIS_BSLH  &kp INT3      // \ (ろ)
+#define JIS_EQL   &kp LS(N2)    // =
+#define JIS_LBRC  &kp RA(LBKT)  // { (JISでは Shift+[ ) -> USでは工夫が必要なため直接指定
+#define JIS_RBRC  &kp RA(RBKT)  // }
+#define JIS_DQT   &kp LS(N2)    // "
+#define JIS_SQT   &kp LS(N7)    // '
+#define JIS_UNDR  &kp LS(INT1)  // _
+#define JIS_CARET &kp EQUAL     // ^
+#define JIS_PRCNT &kp LS(N5)    // %
+#define JIS_COLON &kp NON_US_BSLH // : (け)
+#define JIS_SEMI  &kp SEMI      // ;
+#define JIS_HASH  &kp LS(N3)    // #
+#define JIS_LBKT  &kp RBKT      // [
+#define JIS_RBKT  &kp NON_US_HASH // ]
+#define JIS_AMPS  &kp LS(N6)    // &
+#define JIS_PIPE  &kp LS(INT3)  // |
+#define JIS_LPAR  &kp LS(N8)    // (
+#define JIS_RPAR  &kp LS(N9)    // )
+#define JIS_TILDE &kp LS(EQUAL) // ~
+#define JIS_DLLR  &kp LS(N4)    // $
+#define JIS_GRAVE &kp LS(LBKT)  // `
+#define JIS_AST   &kp LS(COLON) // *
+#define JIS_PLUS  &kp LS(SEMI)  // +
+#define JIS_MINUS &kp MINUS     // -
+
 / {
-    // マクロ定義
     macros {
         m_nn: m_nn {
             compatible = "zmk,behavior-macro";
@@ -26,13 +54,11 @@
         };
     };
 
-    // ホールドタップ設定 (ホーム行モディファイア用)
     behaviors {
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
@@ -45,7 +71,6 @@
         };
     };
 
-    // コンボ設定
     combos {
         compatible = "zmk,combos";
         combo_lang2 { timeout-ms = <50>; key-positions = <14 15>; bindings = <&kp LANG2>; };
@@ -54,13 +79,9 @@
         combo_to_def { timeout-ms = <50>; key-positions = <21 22>; bindings = <&to L_DEF>; };
     };
 
-    // 条件付きレイヤー (Space + BS = System)
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        tri_layer {
-            if-layers = <L_NUM L_ARR>;
-            then-layer = <L_SYS>;
-        };
+        tri_layer { if-layers = <L_NUM L_ARR>; then-layer = <L_SYS>; };
     };
 
     keymap {
@@ -68,18 +89,18 @@
 
         default_layer {
             bindings = <
-&none    &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp QMARK   &kp X      &kp W      &kp R      &kp Y      &kp P      &none
+&none    &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp LS(SLASH) &kp X      &kp W      &kp R      &kp Y      &kp P      &none
 &m_nn    &hm LGUI E &hm LALT I &hm LCTRL O &lt_s L_SFT A &kp U    &kp K      &lt_s L_SFT T &hm RCTRL N &hm RALT S &hm RGUI H &m_ltu
 &none    &kp C      &kp L      &kp V      &kp MINUS  &kp F       &kp G      &kp D      &kp M      &kp J      &kp B      &none
-&none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET &kp LANG1 &none      &none
+&none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         shift_layer {
             bindings = <
-&none    &kp LS(Q)  &kp LS(Z)  &kp SQT    &kp DQT    &kp EXCL    &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
+&none    &kp LS(Q)  &kp LS(Z)  &kp LS(N7) &kp LS(N2) &kp LS(N1)  &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
 &m_nn    &kp LS(E)  &kp LS(I)  &kp LS(O)  &kp LS(A)  &kp LS(U)   &kp LS(K)  &kp LS(T)  &kp LS(N)  &kp LS(S)  &kp LS(H)  &m_ltu
-&none    &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp EQUAL  &kp LS(F)   &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
+&none    &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp LS(MINUS) &kp LS(F) &kp LS(G) &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
@@ -87,35 +108,35 @@
         qwerty_layer {
             bindings = <
 &none    &kp Q      &kp W      &kp E      &kp R      &kp T       &kp Y      &kp U      &kp I      &kp O      &kp P      &none
-&m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &lt_s L_QWS F &kp G    &kp H      &lt_s L_QWS J &hm RCTRL K &hm RALT L &hm RGUI MINUS &m_ltu
-&none    &kp Z      &kp X      &kp C      &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp DOT    &kp QMARK  &none
-&none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET &kp LANG1 &none      &none
+&m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &lt_s L_QWS F &kp G    &kp H      &lt_s L_QWS J &hm RCTRL K &hm RALT L &kp MINUS  &m_ltu
+&none    &kp Z      &kp X      &kp C      &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp DOT    &kp LS(SLASH) &none
+&none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         qwerty_shift_layer {
             bindings = <
 &none    &kp LS(Q)  &kp LS(W)  &kp LS(E)  &kp LS(R)  &kp LS(T)   &kp LS(Y)  &kp LS(U)  &kp LS(I)  &kp LS(O)  &kp LS(P)  &none
-&m_nn    &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)   &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  &kp EQUAL  &m_ltu
-&none    &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)   &kp LS(N)  &kp LS(M)  &kp SQT    &kp DQT    &kp EXCL   &none
+&m_nn    &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)   &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  &kp LS(MINUS) &m_ltu
+&none    &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)   &kp LS(N)  &kp LS(M)  &kp LS(N7) &kp LS(N2) &kp LS(N1) &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         sym_num_layer {
             bindings = <
-&none    &kp AT     &kp LT     &kp GT     &kp SLASH  &kp BSLH    &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
-&m_nn    &kp EQUAL  &kp LBRC   &kp RBRC   &kp DQT    &kp SQT     &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
-&none    &kp UNDER  &kp CARET  &kp PRCNT  &kp COLON  &kp SEMI    &kp EQUAL  &kp SLASH  &kp STAR   &kp MINUS  &kp PLUS   &none
+&none    JIS_AT     JIS_LT     JIS_GT     JIS_SLASH  JIS_BSLH    &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
+&m_nn    JIS_EQL    &kp LS(N8) &kp LS(N9) JIS_DQT    JIS_SQT     &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
+&none    JIS_UNDR   JIS_CARET  JIS_PRCNT  JIS_COLON  JIS_SEMI    JIS_EQL    JIS_SLASH  JIS_AST    JIS_MINUS  JIS_PLUS   &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         sym_arrow_layer {
             bindings = <
-&none    &kp HASH   &kp LBKT   &kp RBKT   &kp AMPS   &kp PIPE    &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
-&m_nn    &kp EQUAL  &kp LPAR   &kp RPAR   &kp DQT    &kp SQT     &kp DEL    &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &m_ltu
-&none    &kp TILDE  &kp DLLR   &kp GRAVE  &kp COLON  &kp SEMI    &kp C_PREV &kp C_RW   &kp C_PP   &kp C_FF   &kp C_NEXT &none
+&none    JIS_HASH   JIS_LBKT   JIS_RBKT   JIS_AMPS   JIS_PIPE    &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
+&m_nn    JIS_EQL    JIS_LPAR   JIS_RPAR   JIS_DQT    JIS_SQT     &kp DEL    &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &m_ltu
+&none    JIS_TILDE  JIS_DLLR   JIS_GRAVE  JIS_COLON  JIS_SEMI    &kp C_PREV &kp C_RW   &kp C_PP   &kp C_FF   &kp C_NEXT &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
