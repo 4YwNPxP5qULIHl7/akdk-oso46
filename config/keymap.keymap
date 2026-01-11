@@ -1,7 +1,7 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 
-// レイヤーインデックスの定義
+// レイヤー番号の定義
 #define L_DEF 0
 #define L_SFT 1
 #define L_QWE 2
@@ -12,20 +12,12 @@
 
 / {
     macros {
-        mc_nn: mc_nn {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N &kp N>;
-        };
-        mc_ltu: mc_ltu {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp L &kp T &kp U>;
-        };
+        mc_nn: mc_nn { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp N &kp N>; };
+        mc_ltu: mc_ltu { compatible = "zmk,behavior-macro"; #binding-cells = <0>; bindings = <&kp L &kp T &kp U>; };
     };
 
     behaviors {
-        // ホームローMod (13-16, 19-22)
+        // ホームローMod用 (13-16, 19-22)
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -34,34 +26,23 @@
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
-        // シフト兼レイヤー切り替え (16, 19)
-        shmt: shift_mod_tap {
+        // シフトレイヤー切り替え用 (16, 19)
+        shmt: shift_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "hold-preferred";
             bindings = <&mo>, <&kp>;
         };
-        // 親指レイヤー用 (40, 41)
-        lt_th: thumb_layer_tap {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            flavor = "balanced";
-            bindings = <&mo>, <&kp>;
-        };
     };
 
     combos {
         compatible = "zmk,combos";
-        // LANG (14-15, 20-21)
         combo_lang2 { timeout-ms = <50>; key-positions = <14 15>; bindings = <&kp LANG2>; };
         combo_lang1 { timeout-ms = <50>; key-positions = <20 21>; bindings = <&kp LANG1>; };
-        // レイヤー切り替え (13-14, 21-22)
-        combo_to_qwerty { timeout-ms = <50>; key-positions = <13 14>; bindings = <&to L_QWE>; };
-        combo_to_default { timeout-ms = <50>; key-positions = <21 22>; bindings = <&to L_DEF>; };
-        // SYSTEM (40-41)
-        combo_system { timeout-ms = <50>; key-positions = <40 41>; bindings = <&mo L_SYS>; };
+        combo_to_qwe { timeout-ms = <50>; key-positions = <13 14>; bindings = <&to L_QWE>; };
+        combo_to_def { timeout-ms = <50>; key-positions = <21 22>; bindings = <&to L_DEF>; };
+        combo_sys { timeout-ms = <50>; key-positions = <40 41>; bindings = <&mo L_SYS>; };
     };
 
     keymap {
@@ -69,64 +50,64 @@
 
         default_layer {
             bindings = <
-&none  &kp Q        &kp Z        &kp COMMA    &kp DOT      &kp SLASH     &kp X  &kp W        &kp R        &kp Y        &kp P        &none
-&mc_nn &hm LGUI E   &hm LALT I   &hm LCTRL O  &shmt L_SFT A &kp U        &kp K  &shmt L_SFT T &hm RCTRL N  &hm RALT S   &hm RGUI H   &mc_ltu
-&none  &kp C        &kp L        &kp V        &kp MINUS    &kp F         &kp G  &kp D        &kp M        &kp J        &kp B        &none
-&none  &none        &kp LANG2    &kp TAB      &lt_th L_NUM SPACE &lt_th L_ARR BSPC &kp RET &kp LANG1 &none &none
+&none  &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp LS(SLASH) &kp X      &kp W      &kp R      &kp Y      &kp P      &none
+&mc_nn &hm LGUI E &hm LALT I &hm LCTRL O &shmt L_SFT A &kp U      &kp K      &shmt L_SFT T &hm RCTRL N &hm RALT S &hm RGUI H &mc_ltu
+&none  &kp C      &kp L      &kp V      &kp MINUS  &kp F      &kp G      &kp D      &kp M      &kp J      &kp B      &none
+&none  &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE  &lt L_ARR BSPC &kp RET &kp LANG1 &none &none
             >;
         };
 
         shift_layer {
             bindings = <
-&none  &kp LS(Q)    &kp LS(Z)    &kp SQT      &kp DQT      &kp EXCL      &kp LS(X) &kp LS(W) &kp LS(R) &kp LS(Y) &kp LS(P)  &none
-&mc_nn &kp LS(E)    &kp LS(I)    &kp LS(O)    &kp LS(A)    &kp LS(U)     &kp LS(K) &kp LS(T) &kp LS(N) &kp LS(S) &kp LS(H)  &mc_ltu
-&none  &kp LS(C)    &kp LS(L)    &kp LS(V)    &kp EQUAL    &kp LS(F)     &kp LS(G) &kp LS(D) &kp LS(M) &kp LS(J) &kp LS(B)  &none
-&none  &none        &kp LANG2    &kp TAB      &kp SPACE    &kp BSPC      &kp RET   &kp LANG1 &none     &none
+&none  &kp LS(Q)  &kp LS(Z)  &kp LS(N7) &kp LS(N2) &kp LS(N1) &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
+&mc_nn &kp LS(E)  &kp LS(I)  &kp LS(O)  &kp LS(A)  &kp LS(U)  &kp LS(K)  &kp LS(T)  &kp LS(N)  &kp LS(S)  &kp LS(H)  &mc_ltu
+&none  &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp LS(MINUS) &kp LS(F) &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
+&none  &none      &kp LANG2  &kp TAB    &kp SPACE  &kp BSPC   &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         qwerty_layer {
             bindings = <
-&none  &kp Q        &kp W        &kp E        &kp R        &kp T         &kp Y  &kp U        &kp I        &kp O        &kp P        &none
-&mc_nn &hm LGUI A   &hm LALT S   &hm LCTRL D  &shmt L_QSFT F &kp G       &kp H  &shmt L_QSFT J &hm RCTRL K  &hm RALT L   &kp MINUS    &mc_ltu
-&none  &kp Z        &kp X        &kp C        &kp V        &kp B         &kp N  &kp M        &kp COMMA    &kp DOT      &kp SLASH    &none
-&none  &none        &kp LANG2    &kp TAB      &lt_th L_NUM SPACE &lt_th L_ARR BSPC &kp RET &kp LANG1 &none &none
+&none  &kp Q      &kp W      &kp E      &kp R      &kp T      &kp Y      &kp U      &kp I      &kp O      &kp P      &none
+&mc_nn &hm LGUI A &hm LALT S &hm LCTRL D &shmt L_QSFT F &kp G  &kp H      &shmt L_QSFT J &hm RCTRL K &hm RALT L &kp MINUS  &mc_ltu
+&none  &kp Z      &kp X      &kp C      &kp V      &kp B      &kp N      &kp M      &kp COMMA  &kp DOT    &kp LS(SLASH) &none
+&none  &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE  &lt L_ARR BSPC &kp RET &kp LANG1 &none &none
             >;
         };
 
         qwerty_shift_layer {
             bindings = <
-&none  &kp LS(Q)    &kp LS(W)    &kp LS(E)    &kp LS(R)    &kp LS(T)     &kp LS(Y) &kp LS(U) &kp LS(I) &kp LS(O) &kp LS(P)  &none
-&mc_nn &kp LS(A)    &kp LS(S)    &kp LS(D)    &kp LS(F)    &kp LS(G)     &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp EQUAL  &mc_ltu
-&none  &kp LS(Z)    &kp LS(X)    &kp LS(C)    &kp LS(V)    &kp LS(B)     &kp LS(N) &kp LS(M) &kp SQT   &kp DQT   &kp EXCL   &none
-&none  &none        &kp LANG2    &kp TAB      &kp SPACE    &kp BSPC      &kp RET   &kp LANG1 &none     &none
+&none  &kp LS(Q)  &kp LS(W)  &kp LS(E)  &kp LS(R)  &kp LS(T)  &kp LS(Y)  &kp LS(U)  &kp LS(I)  &kp LS(O)  &kp LS(P)  &none
+&mc_nn &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)  &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  &kp LS(MINUS) &mc_ltu
+&none  &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)  &kp LS(N)  &kp LS(M)  &kp LS(N7) &kp LS(N2) &kp LS(N1) &none
+&none  &none      &kp LANG2  &kp TAB    &kp SPACE  &kp BSPC   &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         num_layer {
             bindings = <
-&none  &kp AT       &kp LT       &kp GT       &kp SLASH    &kp BSLH      &kp N6 &kp N7     &kp N8     &kp N9     &kp N0     &none
-&mc_nn &kp EQUAL    &kp LBRC     &kp RBRC     &kp DQT      &kp SQT       &kp N1 &kp N2     &kp N3     &kp N4     &kp N5     &mc_ltu
-&none  &kp UNDER    &kp CARET    &kp PRCNT    &kp COLON    &kp SEMI      &kp EQUAL &kp SLASH &kp ASTRK &kp MINUS &kp PLUS   &none
-&none  &none        &kp LANG2    &kp TAB      &kp SPACE    &kp BSPC      &kp RET &kp LANG1   &none      &none
+&none  &kp LBKT   &kp LS(COMMA) &kp LS(DOT) &kp SLASH  &kp INT3   &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
+&mc_nn &kp LS(MINUS) &kp LS(RBKT) &kp LS(NON_US_HASH) &kp LS(N2) &kp LS(N7) &kp N1 &kp N2 &kp N3 &kp N4 &kp N5     &mc_ltu
+&none  &kp LS(INT1) &kp EQUAL  &kp LS(N5) &kp SQT    &kp SEMI   &kp LS(MINUS) &kp SLASH &kp LS(SQT) &kp MINUS &kp LS(SEMI) &none
+&none  &none      &kp LANG2  &kp TAB    &kp SPACE  &kp BSPC   &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         arr_layer {
             bindings = <
-&none  &kp HASH     &kp LBKT     &kp RBKT     &kp AMPS     &kp PIPE      &kp HOME &kp PG_UP &kp UP    &kp PG_DN &kp END    &none
-&mc_nn &kp EQUAL    &kp LPAR     &kp RPAR     &kp DQT      &kp SQT       &kp DEL  &kp LEFT  &kp DOWN  &kp RIGHT &kp INS    &mc_ltu
-&none  &kp TILDE    &kp DLLR     &kp GRAVE    &kp COLON    &kp SEMI      &kp C_PREV &kp C_RW &kp C_PP &kp C_FF  &kp C_NEXT &none
-&none  &none        &kp LANG2    &kp TAB      &kp SPACE    &kp BSPC      &kp RET  &kp LANG1 &none     &none
+&none  &kp LS(N3) &kp RBKT   &kp NON_US_HASH &kp LS(N6) &kp LS(INT3) &kp HOME &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
+&mc_nn &kp LS(MINUS) &kp LS(LBKT) &kp LS(RBKT) &kp LS(N2) &kp LS(N7) &kp DEL  &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &mc_ltu
+&none  &kp LS(EQUAL) &kp LS(N4) &kp LS(LBKT) &kp SQT    &kp SEMI   &kp C_PREV &kp C_RW   &kp C_PP   &kp C_FF   &kp C_NEXT &none
+&none  &none      &kp LANG2  &kp TAB    &kp SPACE  &kp BSPC   &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         system_layer {
             bindings = <
-&none  &kp K_APP    &kp K_CONV   &kp C_BRI_UP &kp C_VOL_UP &kp F11       &kp F6 &kp F7     &kp F8     &kp F9     &kp F10    &none
-&mc_nn &kp ESC      &kp CAPS     &kp C_BRI_DN &kp C_VOL_DN &kp PSCRN     &kp F1 &kp F2     &kp F3     &kp F4     &kp F5     &mc_ltu
-&none  &kp K_PAUSE  &kp K_NCONV  &kp SLCK     &kp C_MUTE   &none         &kp F11 &kp F12    &none      &none      &none      &none
-&none  &none        &kp LANG2    &kp TAB      &kp SPACE    &kp BSPC      &kp RET &kp LANG1   &none      &none
+&none  &kp K_APP  &kp K_CONV &kp C_BRI_UP &kp C_VOL_UP &kp F11    &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
+&mc_nn &kp ESC    &kp CAPS   &kp C_BRI_DN &kp C_VOL_DN &kp PSCRN  &kp F1     &kp F2     &kp F3     &kp F4     &kp F5     &mc_ltu
+&none  &kp K_PAUSE &kp K_NCONV &kp SLCK  &kp C_MUTE &none      &kp F11    &kp F12    &none      &none      &none      &none
+&none  &none      &kp LANG2  &kp TAB    &kp SPACE  &kp BSPC   &kp RET    &kp LANG1  &none      &none
             >;
         };
     };
