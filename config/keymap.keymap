@@ -11,36 +11,36 @@
 #define L_SYS 6
 
 // --- JIS記号定義 ---
-#define JIS_QUES  LS(SLASH)     // ?
-#define JIS_EXCL  LS(N1)        // !
-#define JIS_AT    LBKT          // @
-#define JIS_LT    LS(COMMA)     // <
-#define JIS_GT    LS(DOT)       // >
-#define JIS_SLASH SLASH         // /
-#define JIS_BSLH  INT3          // \ (ろ)
-#define JIS_EQL   LS(MINUS)     // =
-#define JIS_LBRC  LS(LBKT)      // {
-#define JIS_RBRC  LS(RBKT)      // }
-#define JIS_DQT   LS(N2)        // "
-#define JIS_SQT   LS(N7)        // '
-#define JIS_UNDR  LS(INT1)      // _
-#define JIS_CARET EQUAL         // ^
-#define JIS_PRCNT LS(N5)        // %
-#define JIS_COLON SQT           // :
-#define JIS_SEMI  SEMI          // ;
-#define JIS_HASH  LS(N3)        // #
-#define JIS_LBKT  RBKT          // [
-#define JIS_RBKT  NON_US_HASH   // ]
-#define JIS_AMPS  LS(N6)        // &
-#define JIS_PIPE  LS(INT3)      // |
-#define JIS_LPAR  LS(N8)        // (
-#define JIS_RPAR  LS(N9)        // )
-#define JIS_TILDE LS(EQUAL)     // ~
-#define JIS_DLLR  LS(N4)        // $
-#define JIS_GRAVE LS(LBKT)      // `
-#define JIS_AST   LS(SQT)       // *
-#define JIS_PLUS  LS(SEMI)      // +
-#define JIS_MINUS MINUS         // -
+#define JIS_QUES  LS(SLASH)
+#define JIS_EXCL  LS(N1)
+#define JIS_AT    LBKT
+#define JIS_LT    LS(COMMA)
+#define JIS_GT    LS(DOT)
+#define JIS_SLASH SLASH
+#define JIS_BSLH  INT3
+#define JIS_EQL   LS(MINUS)
+#define JIS_LBRC  LS(LBKT)
+#define JIS_RBRC  LS(RBKT)
+#define JIS_DQT   LS(N2)
+#define JIS_SQT   LS(N7)
+#define JIS_UNDR  LS(INT1)
+#define JIS_CARET EQUAL
+#define JIS_PRCNT LS(N5)
+#define JIS_COLON SQT
+#define JIS_SEMI  SEMI
+#define JIS_HASH  LS(N3)
+#define JIS_LBKT  RBKT
+#define JIS_RBKT  NON_US_HASH
+#define JIS_AMPS  LS(N6)
+#define JIS_PIPE  LS(INT3)
+#define JIS_LPAR  LS(N8)
+#define JIS_RPAR  LS(N9)
+#define JIS_TILDE LS(EQUAL)
+#define JIS_DLLR  LS(N4)
+#define JIS_GRAVE LS(LBKT)
+#define JIS_AST   LS(SQT)
+#define JIS_PLUS  LS(SEMI)
+#define JIS_MINUS MINUS
 
 / {
     macros {
@@ -57,21 +57,24 @@
     };
 
     behaviors {
-        // ホームロウ・モディファイア (450msに延長)
+        // 修飾キー/レイヤー切り替え共通 (450ms)
+        // flavor = "balanced" により、他のキーと組み合わせた時の判定を安定させます
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <450>;
             quick-tap-ms = <175>;
-            flavor = "tap-preferred";
+            flavor = "balanced"; 
             bindings = <&kp>, <&kp>;
         };
-        // 16/19番専用: 長押しレイヤー移動 (450msに延長)
+
+        // 16/19番専用: 長押しでレイヤー移動しつつ、自分自身の文字も大文字として機能させる
         ls_mo: layer_shift_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <450>;
-            flavor = "hold-preferred";
+            quick-tap-ms = <175>;
+            flavor = "balanced";
             bindings = <&mo>, <&kp>;
         };
     };
@@ -104,7 +107,7 @@
         shift_layer {
             bindings = <
 &none    &kp LS(Q)  &kp LS(Z)  &kp JIS_SQT &kp JIS_DQT &kp JIS_EXCL &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
-&m_nn    &hm LGUI LS(E) &hm LALT LS(I) &hm LCTRL LS(O) &kp LSHFT  &kp LS(U) &kp LS(K) &kp RSHFT  &hm RCTRL LS(N) &hm RALT LS(S) &hm RGUI LS(H) &m_ltu
+&m_nn    &hm LGUI LS(E) &hm LALT LS(I) &hm LCTRL LS(O) &kp LS(A)  &kp LS(U) &kp LS(K) &kp LS(T)  &hm RCTRL LS(N) &hm RALT LS(S) &hm RGUI LS(H) &m_ltu
 &none    &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp JIS_EQL &kp LS(F)  &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
@@ -112,7 +115,7 @@
 
         qwerty_layer {
             bindings = <
-&none    &kp Q      &kp W      &kp E      &kp R      &kp T       &kp Y      &kp U      &kp I      &kp O      &kp P      &none
+&none    &kp Q      &kp W      &kp E      &kp R      &kp T       &kp Y      &u         &i         &o         &p         &none
 &m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &ls_mo L_QWS F &kp G   &kp H      &ls_mo L_QWS J &hm RCTRL K &hm RALT L &hm RGUI MINUS &m_ltu
 &none    &kp Z      &kp X      &kp C      &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp DOT    &kp JIS_QUES &none
 &none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
@@ -122,7 +125,7 @@
         qwerty_shift_layer {
             bindings = <
 &none    &kp LS(Q)  &kp LS(W)  &kp LS(E)  &kp LS(R)  &kp LS(T)   &kp LS(Y)  &kp LS(U)  &kp LS(I)  &kp LS(O)  &kp LS(P)  &none
-&m_nn    &hm LGUI LS(A) &hm LALT LS(S) &hm LCTRL LS(D) &kp LSHFT &kp LS(G) &kp LS(H) &kp RSHFT &hm RCTRL LS(K) &hm RALT LS(L) &hm RGUI JIS_EQL &m_ltu
+&m_nn    &hm LGUI LS(A) &hm LALT LS(S) &hm LCTRL LS(D) &kp LS(F) &kp LS(G) &kp LS(H) &kp LS(J) &hm RCTRL LS(K) &hm RALT LS(L) &hm RGUI JIS_EQL &m_ltu
 &none    &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)   &kp LS(N)  &kp LS(M)  &kp JIS_SQT &kp JIS_DQT &kp JIS_EXCL &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
