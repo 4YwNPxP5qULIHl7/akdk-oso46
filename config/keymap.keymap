@@ -57,20 +57,20 @@
     };
 
     behaviors {
-        // ホームロウ・モディファイア (350ms)
+        // ホームロウ・モディファイア (450msに延長)
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <350>;
+            tapping-term-ms = <450>;
             quick-tap-ms = <175>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-        // 16/19番専用: 長押しで指定レイヤーへ移動（移動先でShiftを配置）
+        // 16/19番専用: 長押しレイヤー移動 (450msに延長)
         ls_mo: layer_shift_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <350>;
+            tapping-term-ms = <450>;
             flavor = "hold-preferred";
             bindings = <&mo>, <&kp>;
         };
