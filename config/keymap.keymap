@@ -96,7 +96,7 @@
             bindings = <
 &none  &kp LS(Q)  &kp LS(Z)  &kp JA_SQUOT &kp JA_DQUOT &kp JA_EXCL &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
 &mc_nn &kp LS(E)  &kp LS(I)  &kp LS(O)  &kp LS(A)  &kp LS(U)     &kp LS(K)  &kp LS(T)  &kp LS(N)  &kp LS(S)  &kp LS(H)  &mc_ltu
-&none  &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp JA_EQUAL &kp LS(F)   &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
+&none  &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp EQUAL  &kp LS(F)     &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
 &none  &none      &kp LANG2  &kp TAB    &kp SPACE                &kp BSPC   &kp RET    &kp LANG1  &none      &none
             >;
         };
@@ -113,7 +113,7 @@
         qwerty_shift_layer {
             bindings = <
 &none  &kp LS(Q)  &kp LS(W)  &kp LS(E)  &kp LS(R)  &kp LS(T)     &kp LS(Y)  &kp LS(U)  &kp LS(I)  &kp LS(O)  &kp LS(P)  &none
-&mc_nn &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)     &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  &kp JA_EQUAL &mc_ltu
+&mc_nn &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)     &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  &kp EQUAL  &mc_ltu
 &none  &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)     &kp LS(N)  &kp LS(M)  &kp JA_SQUOT &kp JA_DQUOT &kp JA_EXCL &none
 &none  &none      &kp LANG2  &kp TAB    &kp SPACE                &kp BSPC   &kp RET    &kp LANG1  &none      &none
             >;
@@ -122,8 +122,8 @@
         num_layer {
             bindings = <
 &none  &kp JA_AT  &kp JA_LT  &kp JA_GT  &kp SLASH  &kp JA_YEN    &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
-&mc_nn &kp JA_EQUAL &kp JA_LBRC &kp JA_RBRC &kp JA_DQUOT &kp JA_SQUOT &kp N1 &kp N2    &kp N3     &kp N4     &kp N5     &mc_ltu
-&none  &kp JA_UNDER &kp JA_HAT &kp JA_PERC &kp JA_COLON &kp JA_SCLN &kp JA_EQUAL &kp SLASH &kp JA_AST &kp MINUS &kp JA_PLUS &none
+&mc_nn &kp EQUAL  &kp JA_LBRC &kp JA_RBRC &kp JA_DQUOT &kp JA_SQUOT &kp N1  &kp N2     &kp N3     &kp N4     &kp N5     &mc_ltu
+&none  &kp JA_UNDER &kp JA_HAT &kp JA_PERC &kp JA_COLON &kp JA_SCLN &kp EQUAL &kp SLASH &kp JA_AST &kp MINUS &kp JA_PLUS &none
 &none  &none      &kp LANG2  &kp TAB    &kp SPACE                &kp BSPC   &kp RET    &kp LANG1  &none      &none
             >;
         };
@@ -131,7 +131,7 @@
         arr_layer {
             bindings = <
 &none  &kp JA_HASH &kp JA_LBKT &kp JA_RBKT &kp JA_AMPS &kp JA_PIPE &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
-&mc_nn &kp JA_EQUAL &kp JA_LPAR &kp JA_RPAR &kp JA_DQUOT &kp JA_SQUOT &kp DEL &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &mc_ltu
+&mc_nn &kp EQUAL   &kp JA_LPAR &kp JA_RPAR &kp JA_DQUOT &kp JA_SQUOT &kp DEL  &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &mc_ltu
 &none  &kp JA_TILDE &kp JA_DLLR &kp JA_GRV  &kp JA_COLON &kp JA_SCLN &kp C_PREV &kp C_RW   &kp C_PP   &kp C_FF   &kp C_NEXT &none
 &none  &none      &kp LANG2  &kp TAB    &kp SPACE                &kp BSPC   &kp RET    &kp LANG1  &none      &none
             >;
