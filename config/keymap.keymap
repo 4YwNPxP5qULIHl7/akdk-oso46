@@ -22,7 +22,6 @@
 #define JIS_TILDE LS(EQUAL)       // ~
 #define JIS_PIPE  LS(INT3)        // |
 #define JIS_BSLH  INT3            // \ (ろ)
-#define JIS_YEN   INT3            // ¥ (ろ) ※環境によりINT1
 #define JIS_UNDR  LS(INT1)        // _
 
 / {
@@ -70,7 +69,7 @@
             bindings = <
 &none    &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp SLASH  &kp X      &kp W      &kp R      &kp Y      &kp P      &none
 &m_nn    &hm LGUI E &hm LALT I &hm LCTRL O &hm LSHFT A &kp U     &kp K      &hm RSHFT T &hm RCTRL N &hm RALT S &hm RGUI H &m_ltu
-&none    &kp C      &kp L      &kp V      &kp MINUS  &kp F      &kp G      &kp D      &kp M      &kp J      &kp B      &none
+&none    &kp C      &kp L      &kp V      &kp MINUS  &kp f      &kp G      &kp D      &kp M      &kp J      &kp B      &none
 &none    &none      &kp LANG2  &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET &kp LANG1 &none      &none
             >;
         };
@@ -88,7 +87,7 @@
             bindings = <
 &none    &kp JIS_AT   &kp LS(COMMA) &kp LS(DOT) &kp SLASH    &kp JIS_BSLH &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
 &m_nn    &kp LS(MINUS) &kp JIS_LBRC  &kp JIS_RBRC &kp JIS_QUOT &kp LS(N1)   &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
-&none    &JIS_UNDR    &kp JIS_CARET &kp LS(N5)   &kp JIS_COLON &kp JIS_SEMI &kp LS(MINUS) &kp SLASH &kp LS(SQT) &kp MINUS &kp LS(SEMI) &none
+&none    &kp JIS_UNDR &kp JIS_CARET &kp LS(N5)   &kp JIS_COLON &kp JIS_SEMI &kp LS(MINUS) &kp SLASH &kp LS(SQT) &kp MINUS &kp LS(SEMI) &none
 &none    &none      &kp LANG2  &kp TAB    &trans       &trans       &kp RET    &kp LANG1  &none      &none
             >;
         };
