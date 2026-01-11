@@ -1,167 +1,131 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
 
-/* JIS配列用 記号変換定義 */
-#define JA_AT    LBKT
-#define JA_LBKT  RBKT
-#define JA_RBKT  NON_US_HASH
-#define JA_COLON SQT
-#define JA_SCLN  SEMI
-#define JA_HAT   EQUAL
-#define JA_YEN   INT3
-#define JA_PIPE  LS(INT3)
-#define JA_TILDE LS(EQUAL)
-#define JA_UNDER LS(INT1)
-#define JA_AMPS  LS(N6)
-#define JA_DLLR  LS(N4)
-#define JA_DQUOT LS(N2)
-#define JA_SQUOT LS(N7)
-#define JA_LBRC  LS(RBKT)
-#define JA_RBRC  LS(NON_US_HASH)
-#define JA_AST   LS(SQT)
-#define JA_PLUS  LS(SEMI)
-#define JA_GRV   LS(LBKT)
-#define JA_HASH  LS(N3)
-#define JA_LT    LS(COMMA)
-#define JA_GT    LS(DOT)
-#define JA_EXCL  LS(N1)
-#define JA_QUES  LS(SLASH)
-#define JA_LPAR  LS(N8)
-#define JA_RPAR  LS(N9)
-#define JA_PERC  LS(N5)
-
-/* レイヤー定義 */
+// レイヤー定義
 #define L_DEF 0
 #define L_SFT 1
 #define L_QWE 2
-#define L_QSF 3
+#define L_QWS 3
 #define L_NUM 4
 #define L_ARR 5
 #define L_SYS 6
 
 / {
+    // マクロ定義
     macros {
-        mc_nn: mc_nn {
+        m_nn: m_nn {
             compatible = "zmk,behavior-macro";
-            label="MC_NN";
-            #binding-cells=<0>;
-            bindings=<&kp N &kp N>;
+            #binding-cells = <0>;
+            bindings = <&kp N &kp N>;
         };
-        mc_ltu: mc_ltu {
+        m_ltu: m_ltu {
             compatible = "zmk,behavior-macro";
-            label="MC_LTU";
-            #binding-cells=<0>;
-            bindings=<&kp L &kp T &kp U>;
+            #binding-cells = <0>;
+            bindings = <&kp L &kp T &kp U>;
         };
     };
 
+    // ホールドタップ設定 (ホーム行モディファイア用)
     behaviors {
-        hm: hm {
+        hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
-            label = "HM";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
-            flavor = "balanced";
+            quick-tap-ms = <0>;
+            flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-
-        sh_lt: sh_lt {
+        lt_s: layer_tap_shift {
             compatible = "zmk,behavior-hold-tap";
-            label = "SH_LT";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "hold-preferred";
             bindings = <&mo>, <&kp>;
         };
-
-        lt_sp: lt_sp {
-            compatible = "zmk,behavior-hold-tap";
-            label = "LT_SP";
-            #binding-cells = <2>;
-            tapping-term-ms = <200>;
-            flavor = "balanced";
-            bindings = <&mo>, <&kp>;
-        };
     };
 
+    // コンボ設定
     combos {
         compatible = "zmk,combos";
-        combo_lang2  { timeout-ms = <50>; key-positions = <14 15>; bindings = <&kp LANG2>; };
-        combo_lang1  { timeout-ms = <50>; key-positions = <20 21>; bindings = <&kp LANG1>; };
-        combo_to_qwe { timeout-ms = <50>; key-positions = <13 14>; bindings = <&to L_QWE>; };
+        combo_lang2 { timeout-ms = <50>; key-positions = <14 15>; bindings = <&kp LANG2>; };
+        combo_lang1 { timeout-ms = <50>; key-positions = <20 21>; bindings = <&kp LANG1>; };
+        combo_to_qwerty { timeout-ms = <50>; key-positions = <13 14>; bindings = <&to L_QWE>; };
         combo_to_def { timeout-ms = <50>; key-positions = <21 22>; bindings = <&to L_DEF>; };
+    };
+
+    // 条件付きレイヤー (Space + BS = System)
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <L_NUM L_ARR>;
+            then-layer = <L_SYS>;
+        };
     };
 
     keymap {
         compatible = "zmk,keymap";
 
-        /* デフォルト */
         default_layer {
             bindings = <
-&none   &kp Q    &kp Z    &kp COMMA &kp DOT  &kp JA_QUES   &kp X   &kp W   &kp R   &kp Y   &kp P   &none
-&mc_nn  &hm LGUI E &hm LALT I &hm LCTRL O &sh_lt L_SFT A &kp U &kp K &sh_lt L_SFT T &hm RCTRL N &hm RALT S &hm RGUI H &mc_ltu
-&none   &kp C    &kp L    &kp V     &kp MINUS &kp F &kp G &kp D &kp M &kp J &kp B &none
-&none   &none    &kp LANG2 &kp TAB &lt_sp L_NUM SPACE &lt_sp L_ARR BSPC &kp ENTER &kp LANG1 &none &none
+&none    &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp QMARK   &kp X      &kp W      &kp R      &kp Y      &kp P      &none
+&m_nn    &hm LGUI E &hm LALT I &hm LCTRL O &lt_s L_SFT A &kp U    &kp K      &lt_s L_SFT T &hm RCTRL N &hm RALT S &hm RGUI H &m_ltu
+&none    &kp C      &kp L      &kp V      &kp MINUS  &kp F       &kp G      &kp D      &kp M      &kp J      &kp B      &none
+&none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET &kp LANG1 &none      &none
             >;
         };
 
-        /* シフト */
         shift_layer {
             bindings = <
-&none   &kp LS(Q) &kp LS(Z) &kp JA_SQUOT &kp JA_DQUOT &kp JA_EXCL &kp LS(X) &kp LS(W) &kp LS(R) &kp LS(Y) &kp LS(P) &none
-&mc_nn  &kp LS(E) &kp LS(I) &kp LS(O) &kp LS(A) &kp LS(U) &kp LS(K) &kp LS(T) &kp LS(N) &kp LS(S) &kp LS(H) &mc_ltu
-&none   &kp LS(C) &kp LS(L) &kp LS(V) &kp EQUAL &kp LS(F) &kp LS(G) &kp LS(D) &kp LS(M) &kp LS(J) &kp LS(B) &none
-&none   &none     &kp LANG2 &kp TAB &kp SPACE &kp BSPC &kp ENTER &kp LANG1 &none &none
+&none    &kp LS(Q)  &kp LS(Z)  &kp SQT    &kp DQT    &kp EXCL    &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
+&m_nn    &kp LS(E)  &kp LS(I)  &kp LS(O)  &kp LS(A)  &kp LS(U)   &kp LS(K)  &kp LS(T)  &kp LS(N)  &kp LS(S)  &kp LS(H)  &m_ltu
+&none    &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp EQUAL  &kp LS(F)   &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
+&none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
 
-        /* QWERTY */
         qwerty_layer {
             bindings = <
-&none   &kp Q &kp W &kp E &kp R &kp T &kp Y &kp U &kp I &kp O &kp P &none
-&mc_nn  &hm LGUI A &hm LALT S &hm LCTRL D &sh_lt L_QSF F &kp G &kp H &sh_lt L_QSF J &hm RCTRL K &hm RALT L &kp MINUS &mc_ltu
-&none   &kp Z &kp X &kp C &kp V &kp B &kp N &kp M &kp COMMA &kp DOT &kp JA_QUES &none
-&none   &none &kp LANG2 &kp TAB &lt_sp L_NUM SPACE &lt_sp L_ARR BSPC &kp ENTER &kp LANG1 &none &none
+&none    &kp Q      &kp W      &kp E      &kp R      &kp T       &kp Y      &kp U      &kp I      &kp O      &kp P      &none
+&m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &lt_s L_QWS F &kp G    &kp H      &lt_s L_QWS J &hm RCTRL K &hm RALT L &hm RGUI MINUS &m_ltu
+&none    &kp Z      &kp X      &kp C      &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp DOT    &kp QMARK  &none
+&none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET &kp LANG1 &none      &none
             >;
         };
 
-        /* QWERTY シフト */
         qwerty_shift_layer {
             bindings = <
-&none   &kp LS(Q) &kp LS(W) &kp LS(E) &kp LS(R) &kp LS(T) &kp LS(Y) &kp LS(U) &kp LS(I) &kp LS(O) &kp LS(P) &none
-&mc_nn  &kp LS(A) &kp LS(S) &kp LS(D) &kp LS(F) &kp LS(G) &kp LS(H) &kp LS(J) &kp LS(K) &kp LS(L) &kp EQUAL &mc_ltu
-&none   &kp LS(Z) &kp LS(X) &kp LS(C) &kp LS(V) &kp LS(B) &kp LS(N) &kp LS(M) &kp JA_SQUOT &kp JA_DQUOT &kp JA_EXCL &none
-&none   &none &kp LANG2 &kp TAB &kp SPACE &kp BSPC &kp ENTER &kp LANG1 &none &none
+&none    &kp LS(Q)  &kp LS(W)  &kp LS(E)  &kp LS(R)  &kp LS(T)   &kp LS(Y)  &kp LS(U)  &kp LS(I)  &kp LS(O)  &kp LS(P)  &none
+&m_nn    &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)   &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  &kp EQUAL  &m_ltu
+&none    &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)   &kp LS(N)  &kp LS(M)  &kp SQT    &kp DQT    &kp EXCL   &none
+&none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
 
-        /* 数字・記号 */
-        num_layer {
+        sym_num_layer {
             bindings = <
-&none &kp JA_AT &kp JA_LT &kp JA_GT &kp SLASH &kp JA_YEN &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &none
-&mc_nn &kp EQUAL &kp JA_LBRC &kp JA_RBRC &kp JA_DQUOT &kp JA_SQUOT &kp N1 &kp N2 &kp N3 &kp N4 &kp N5 &mc_ltu
-&none &kp JA_UNDER &kp JA_HAT &kp JA_PERC &kp JA_COLON &kp JA_SCLN &kp EQUAL &kp SLASH &kp JA_AST &kp MINUS &kp JA_PLUS &none
-&none &none &kp LANG2 &kp TAB &kp SPACE &kp BSPC &kp ENTER &kp LANG1 &none &none
+&none    &kp AT     &kp LT     &kp GT     &kp SLASH  &kp BSLH    &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
+&m_nn    &kp EQUAL  &kp LBRC   &kp RBRC   &kp DQT    &kp SQT     &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
+&none    &kp UNDER  &kp CARET  &kp PRCNT  &kp COLON  &kp SEMI    &kp EQUAL  &kp SLASH  &kp STAR   &kp MINUS  &kp PLUS   &none
+&none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
 
-        /* 記号・矢印 */
-        arr_layer {
+        sym_arrow_layer {
             bindings = <
-&none &kp JA_HASH &kp JA_LBKT &kp JA_RBKT &kp JA_AMPS &kp JA_PIPE &kp HOME &kp PG_UP &kp UP &kp PG_DN &kp END &none
-&mc_nn &kp EQUAL &kp JA_LPAR &kp JA_RPAR &kp JA_DQUOT &kp JA_SQUOT &kp DEL &kp LEFT &kp DOWN &kp RIGHT &kp INS &mc_ltu
-&none &kp JA_TILDE &kp JA_DLLR &kp JA_GRV &kp JA_COLON &kp JA_SCLN &kp C_PREV &kp C_RW &kp C_PP &kp C_FF &kp C_NEXT &none
-&none &none &kp LANG2 &kp TAB &kp SPACE &kp BSPC &kp ENTER &kp LANG1 &none &none
+&none    &kp HASH   &kp LBKT   &kp RBKT   &kp AMPS   &kp PIPE    &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
+&m_nn    &kp EQUAL  &kp LPAR   &kp RPAR   &kp DQT    &kp SQT     &kp DEL    &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &m_ltu
+&none    &kp TILDE  &kp DLLR   &kp GRAVE  &kp COLON  &kp SEMI    &kp C_PREV &kp C_RW   &kp C_PP   &kp C_FF   &kp C_NEXT &none
+&none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
 
-        /* システム */
         system_layer {
             bindings = <
-&none &kp K_APP &kp K_CONV &kp C_BRI_UP &kp C_VOL_UP &kp F11 &kp F6 &kp F7 &kp F8 &kp F9 &kp F10 &none
-&mc_nn &kp ESC &kp CAPS &kp C_BRI_DN &kp C_VOL_DN &kp PSCRN &kp F1 &kp F2 &kp F3 &kp F4 &kp F5 &mc_ltu
-&none &kp K_PAUSE &kp K_NCONV &kp SLCK &kp C_MUTE &none &kp F11 &kp F12 &none &none &none &none
-&none &none &kp LANG2 &kp TAB &kp SPACE &kp BSPC &kp ENTER &kp LANG1 &none &none
+&none    &kp K_APP  &kp LANG1  &kp C_BRI_UP &kp C_VOL_UP &kp F11   &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
+&m_nn    &kp ESC    &kp CAPS   &kp C_BRI_DN &kp C_VOL_DN &kp PSCRN &kp F1     &kp F2     &kp F3     &kp F4     &kp F5     &m_ltu
+&none    &kp PAUSE_BREAK &kp LANG2 &kp SLCK &kp C_MUTE  &none     &kp F11    &kp F12    &none      &none      &none      &none
+&none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
     };
