@@ -58,7 +58,6 @@
 
     behaviors {
         // 修飾キー/レイヤー切り替え共通 (450ms)
-        // flavor = "balanced" により、他のキーと組み合わせた時の判定を安定させます
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -68,7 +67,7 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // 16/19番専用: 長押しでレイヤー移動しつつ、自分自身の文字も大文字として機能させる
+        // 16/19番専用
         ls_mo: layer_shift_hold_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -115,7 +114,7 @@
 
         qwerty_layer {
             bindings = <
-&none    &kp Q      &kp W      &kp E      &kp R      &kp T       &kp Y      &u         &i         &o         &p         &none
+&none    &kp Q      &kp W      &kp E      &kp R      &kp T       &kp Y      &kp U      &kp I      &kp O      &kp P      &none
 &m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &ls_mo L_QWS F &kp G   &kp H      &ls_mo L_QWS J &hm RCTRL K &hm RALT L &hm RGUI MINUS &m_ltu
 &none    &kp Z      &kp X      &kp C      &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp DOT    &kp JIS_QUES &none
 &none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
