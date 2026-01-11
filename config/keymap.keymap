@@ -10,33 +10,33 @@
 #define L_ARR 5
 #define L_SYS 6
 
-// --- JIS記号のための最終修正版エイリアス ---
-#define JIS_AT    &kp LBKT          // @
-#define JIS_LT    &kp LS(COMMA)     // <
-#define JIS_GT    &kp LS(DOT)       // >
-#define JIS_SLASH &kp SLASH         // /
-#define JIS_BSLH  &kp INT3          // \ (ろ)
-#define JIS_EQL   &kp LS(MINUS)     // = (JIS Shift + -)
-#define JIS_DQT   &kp LS(N2)        // "
-#define JIS_SQT   &kp LS(N7)        // '
-#define JIS_UNDR  &kp LS(INT1)      // _
-#define JIS_CARET &kp EQUAL         // ^
-#define JIS_PRCNT &kp LS(N5)        // %
-#define JIS_COLON &kp SQT           // : (JIS け)
-#define JIS_SEMI  &kp SEMI          // ;
-#define JIS_HASH  &kp LS(N3)        // #
-#define JIS_LBKT  &kp RBKT          // [
-#define JIS_RBKT  &kp NON_US_HASH   // ]
-#define JIS_AMPS  &kp LS(N6)        // &
-#define JIS_PIPE  &kp LS(INT3)      // |
-#define JIS_LPAR  &kp LS(N8)        // (
-#define JIS_RPAR  &kp LS(N9)        // )
-#define JIS_TILDE &kp LS(EQUAL)     // ~
-#define JIS_DLLR  &kp LS(N4)        // $
-#define JIS_GRAVE &kp LS(LBKT)      // `
-#define JIS_AST   &kp LS(SQT)       // * (JIS Shift + :)
-#define JIS_PLUS  &kp LS(SEMI)      // +
-#define JIS_MINUS &kp MINUS         // -
+// --- JIS記号キーコード定義（純粋なキーコードのみ） ---
+#define JIS_AT    LBKT          // @
+#define JIS_LT    LS(COMMA)     // <
+#define JIS_GT    LS(DOT)       // >
+#define JIS_SLASH SLASH         // /
+#define JIS_BSLH  INT3          // \ (ろ)
+#define JIS_EQL   LS(MINUS)     // = (JIS Shift + -)
+#define JIS_DQT   LS(N2)        // "
+#define JIS_SQT   LS(N7)        // '
+#define JIS_UNDR  LS(INT1)      // _
+#define JIS_CARET EQUAL         // ^
+#define JIS_PRCNT LS(N5)        // %
+#define JIS_COLON SQT           // : (JIS け)
+#define JIS_SEMI  SEMI          // ;
+#define JIS_HASH  LS(N3)        // #
+#define JIS_LBKT  RBKT          // [
+#define JIS_RBKT  NON_US_HASH   // ]
+#define JIS_AMPS  LS(N6)        // &
+#define JIS_PIPE  LS(INT3)      // |
+#define JIS_LPAR  LS(N8)        // (
+#define JIS_RPAR  LS(N9)        // )
+#define JIS_TILDE LS(EQUAL)     // ~
+#define JIS_DLLR  LS(N4)        // $
+#define JIS_GRAVE LS(LBKT)      // `
+#define JIS_AST   LS(SQT)       // * (JIS Shift + :)
+#define JIS_PLUS  LS(SEMI)      // +
+#define JIS_MINUS MINUS         // -
 
 / {
     macros {
@@ -56,15 +56,15 @@
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <280>; // 200から280へ延長（誤爆防止）
-            quick-tap-ms = <175>;    // 同じキーを連打した時はタップを優先
+            tapping-term-ms = <280>; // 誤爆防止のため280ms
+            quick-tap-ms = <175>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
         lt_s: layer_tap_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <250>; // レイヤー切り替えも少し長めに
+            tapping-term-ms = <250>;
             flavor = "hold-preferred";
             bindings = <&mo>, <&kp>;
         };
@@ -97,9 +97,9 @@
 
         shift_layer {
             bindings = <
-&none    &kp LS(Q)  &kp LS(Z)  &JIS_SQT   &JIS_DQT   &kp LS(N1)  &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
+&none    &kp LS(Q)  &kp LS(Z)  &kp JIS_SQT &kp JIS_DQT &kp LS(N1) &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
 &m_nn    &kp LS(E)  &kp LS(I)  &kp LS(O)  &kp LS(A)  &kp LS(U)   &kp LS(K)  &kp LS(T)  &kp LS(N)  &kp LS(S)  &kp LS(H)  &m_ltu
-&none    &kp LS(C)  &kp LS(L)  &kp LS(V)  JIS_EQL    &kp LS(F)   &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
+&none    &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp JIS_EQL &kp LS(F)  &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
@@ -116,26 +116,26 @@
         qwerty_shift_layer {
             bindings = <
 &none    &kp LS(Q)  &kp LS(W)  &kp LS(E)  &kp LS(R)  &kp LS(T)   &kp LS(Y)  &kp LS(U)  &kp LS(I)  &kp LS(O)  &kp LS(P)  &none
-&m_nn    &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)   &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  JIS_EQL    &m_ltu
-&none    &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)   &kp LS(N)  &kp LS(M)  JIS_SQT    JIS_DQT    &kp LS(N1) &none
+&m_nn    &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)   &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  &kp JIS_EQL &m_ltu
+&none    &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)   &kp LS(N)  &kp LS(M)  &kp JIS_SQT &kp JIS_DQT &kp LS(N1) &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         sym_num_layer {
             bindings = <
-&none    JIS_AT     JIS_LT     JIS_GT     JIS_SLASH  JIS_BSLH    &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
-&m_nn    JIS_EQL    JIS_LPAR   JIS_RPAR   JIS_DQT    JIS_SQT     &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
-&none    JIS_UNDR   JIS_CARET  JIS_PRCNT  JIS_COLON  JIS_SEMI    JIS_EQL    JIS_SLASH  JIS_AST    JIS_MINUS  JIS_PLUS   &none
+&none    &kp JIS_AT &kp JIS_LT &kp JIS_GT &kp JIS_SLASH &kp JIS_BSLH &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
+&m_nn    &kp JIS_EQL &kp JIS_LPAR &kp JIS_RPAR &kp JIS_DQT &kp JIS_SQT &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
+&none    &kp JIS_UNDR &kp JIS_CARET &kp JIS_PRCNT &kp JIS_COLON &kp JIS_SEMI &kp JIS_EQL &kp JIS_SLASH &kp JIS_AST &kp JIS_MINUS &kp JIS_PLUS &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         sym_arrow_layer {
             bindings = <
-&none    JIS_HASH   JIS_LBKT   JIS_RBKT   JIS_AMPS   JIS_PIPE    &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
-&m_nn    JIS_EQL    JIS_LPAR   JIS_RPAR   JIS_DQT    JIS_SQT     &kp DEL    &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &m_ltu
-&none    JIS_TILDE  JIS_DLLR   JIS_GRAVE  JIS_COLON  JIS_SEMI    &kp C_PREV &kp C_RW   &kp C_PP   &kp C_FF   &kp C_NEXT &none
+&none    &kp JIS_HASH &kp JIS_LBKT &kp JIS_RBKT &kp JIS_AMPS &kp JIS_PIPE &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
+&m_nn    &kp JIS_EQL &kp JIS_LPAR &kp JIS_RPAR &kp JIS_DQT &kp JIS_SQT &kp DEL    &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &m_ltu
+&none    &kp JIS_TILDE &kp JIS_DLLR &kp JIS_GRAVE &kp JIS_COLON &kp JIS_SEMI &kp C_PREV &kp C_RW   &kp C_PP   &kp C_FF   &kp C_NEXT &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
