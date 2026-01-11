@@ -8,6 +8,23 @@
 #define L_ARR 3
 #define L_SYS 4
 
+// --- JIS配列用キーコード定義 ---
+#define JIS_AT    LBKT            // @
+#define JIS_LBRC  LS(LBKT)        // {
+#define JIS_RBRC  LS(RBKT)        // }
+#define JIS_LBKT  RBKT            // [
+#define JIS_RBKT  NON_US_HASH     // ]
+#define JIS_COLON SQT             // :
+#define JIS_SEMI  SEMI            // ;
+#define JIS_QUOT  LS(N7)          // '
+#define JIS_DQUOT LS(N2)          // "
+#define JIS_CARET EQUAL           // ^
+#define JIS_TILDE LS(EQUAL)       // ~
+#define JIS_PIPE  LS(INT3)        // |
+#define JIS_BSLH  INT3            // \ (ろ)
+#define JIS_YEN   INT3            // ¥ (ろ) ※環境によりINT1
+#define JIS_UNDR  LS(INT1)        // _
+
 / {
     macros {
         m_nn: m_nn {
@@ -23,9 +40,6 @@
     };
 
     behaviors {
-        // ホームロウ修飾キーの設定
-        // 16番と19番にShiftを割り当てることで、Shift+クリック等のショートカットと
-        // 大文字入力を両立させます。
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -38,10 +52,8 @@
 
     combos {
         compatible = "zmk,combos";
-        // LANG切り替え
         combo_lang2 { timeout-ms = <30>; key-positions = <14 15>; bindings = <&kp LANG2>; };
         combo_lang1 { timeout-ms = <30>; key-positions = <20 21>; bindings = <&kp LANG1>; };
-        // レイヤー移動
         combo_to_qwerty { timeout-ms = <30>; key-positions = <13 14 15 16>; bindings = <&to L_QWE>; };
         combo_to_def { timeout-ms = <30>; key-positions = <19 20 21 22>; bindings = <&to L_DEF>; };
     };
@@ -74,25 +86,25 @@
 
         symbol_num_layer {
             bindings = <
-&none    &kp RA(LBKT) &kp LS(COMMA) &kp LS(DOT) &kp SLASH  &kp INT3   &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
-&m_nn    &kp LS(MINUS) &kp LS(LBKT) &kp LS(RBKT) &kp LS(N7) &kp LS(N1) &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
-&none    &kp LS(INT1) &kp EQUAL  &kp LS(N5) &kp SQT    &kp SEMI   &kp LS(MINUS) &kp SLASH &kp LS(SQT) &kp MINUS &kp LS(SEMI) &none
-&none    &none      &kp LANG2  &kp TAB    &trans     &trans     &kp RET    &kp LANG1  &none      &none
+&none    &kp JIS_AT   &kp LS(COMMA) &kp LS(DOT) &kp SLASH    &kp JIS_BSLH &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
+&m_nn    &kp LS(MINUS) &kp JIS_LBRC  &kp JIS_RBRC &kp JIS_QUOT &kp LS(N1)   &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
+&none    &JIS_UNDR    &kp JIS_CARET &kp LS(N5)   &kp JIS_COLON &kp JIS_SEMI &kp LS(MINUS) &kp SLASH &kp LS(SQT) &kp MINUS &kp LS(SEMI) &none
+&none    &none      &kp LANG2  &kp TAB    &trans       &trans       &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         arrow_layer {
             bindings = <
-&none    &kp LS(N3) &kp RBKT   &kp NON_US_HASH &kp LS(N6) &kp LS(INT3) &kp HOME &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
-&m_nn    &kp LS(MINUS) &kp LS(N8) &kp LS(N9) &kp LS(N2) &kp LS(SLASH) &kp DEL  &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &m_ltu
-&none    &kp LS(EQUAL) &kp LS(N4) &kp LS(LBKT) &kp SQT  &kp SEMI   &kp C_PREV &kp C_RW   &kp C_PP   &kp C_FF   &kp C_NEXT &none
-&none    &none      &kp LANG2  &kp TAB    &trans     &trans     &kp RET    &kp LANG1  &none      &none
+&none    &kp LS(N3)   &kp JIS_LBKT  &kp JIS_RBKT &kp LS(N6)   &kp JIS_PIPE &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
+&m_nn    &kp LS(MINUS) &kp LS(N8)    &kp LS(N9)   &kp JIS_DQUOT &kp LS(SLASH) &kp DEL    &kp LEFT   &kp DOWN   &kp RIGHT  &kp INS    &m_ltu
+&none    &kp JIS_TILDE &kp LS(N4)    &kp JIS_LBRC &kp JIS_COLON &kp JIS_SEMI &kp C_PREV &kp C_RW   &kp C_PP   &kp C_FF   &kp C_NEXT &none
+&none    &none      &kp LANG2  &kp TAB    &trans       &trans       &kp RET    &kp LANG1  &none      &none
             >;
         };
 
         system_layer {
             bindings = <
-&none    &kp K_APP  &kp LS(N1) &kp C_BRI_UP &kp C_VOL_UP &kp F11    &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
+&none    &kp K_APP  &kp LANG1  &kp C_BRI_UP &kp C_VOL_UP &kp F11    &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
 &m_nn    &kp ESC    &kp CAPS   &kp C_BRI_DN &kp C_VOL_DN &kp PSCRN  &kp F1     &kp F2     &kp F3     &kp F4     &kp F5     &m_ltu
 &none    &kp PAUSE_BREAK &kp LANG2 &kp SLCK &kp C_MUTE &none      &kp F11    &kp F12    &none      &none      &none      &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans     &kp RET    &kp LANG1  &none      &none
