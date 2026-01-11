@@ -10,35 +10,33 @@
 #define L_ARR 5
 #define L_SYS 6
 
-// JIS記号のためのエイリアス設定 (USキーコードをJISとして解釈)
-#define JIS_AT    &kp LBKT      // @
-#define JIS_LT    &kp LS(COMMA) // <
-#define JIS_GT    &kp LS(DOT)   // >
-#define JIS_SLASH &kp SLASH     // /
-#define JIS_BSLH  &kp INT3      // \ (ろ)
-#define JIS_EQL   &kp LS(N2)    // =
-#define JIS_LBRC  &kp RA(LBKT)  // { (JISでは Shift+[ ) -> USでは工夫が必要なため直接指定
-#define JIS_RBRC  &kp RA(RBKT)  // }
-#define JIS_DQT   &kp LS(N2)    // "
-#define JIS_SQT   &kp LS(N7)    // '
-#define JIS_UNDR  &kp LS(INT1)  // _
-#define JIS_CARET &kp EQUAL     // ^
-#define JIS_PRCNT &kp LS(N5)    // %
-#define JIS_COLON &kp NON_US_BSLH // : (け)
-#define JIS_SEMI  &kp SEMI      // ;
-#define JIS_HASH  &kp LS(N3)    // #
-#define JIS_LBKT  &kp RBKT      // [
-#define JIS_RBKT  &kp NON_US_HASH // ]
-#define JIS_AMPS  &kp LS(N6)    // &
-#define JIS_PIPE  &kp LS(INT3)  // |
-#define JIS_LPAR  &kp LS(N8)    // (
-#define JIS_RPAR  &kp LS(N9)    // )
-#define JIS_TILDE &kp LS(EQUAL) // ~
-#define JIS_DLLR  &kp LS(N4)    // $
-#define JIS_GRAVE &kp LS(LBKT)  // `
-#define JIS_AST   &kp LS(COLON) // *
-#define JIS_PLUS  &kp LS(SEMI)  // +
-#define JIS_MINUS &kp MINUS     // -
+// --- JIS記号のための最終修正版エイリアス ---
+#define JIS_AT    &kp LBKT          // @
+#define JIS_LT    &kp LS(COMMA)     // <
+#define JIS_GT    &kp LS(DOT)       // >
+#define JIS_SLASH &kp SLASH         // /
+#define JIS_BSLH  &kp INT3          // \ (ろ)
+#define JIS_EQL   &kp LS(MINUS)     // = (JIS Shift + -)
+#define JIS_DQT   &kp LS(N2)        // "
+#define JIS_SQT   &kp LS(N7)        // '
+#define JIS_UNDR  &kp LS(INT1)      // _
+#define JIS_CARET &kp EQUAL         // ^
+#define JIS_PRCNT &kp LS(N5)        // %
+#define JIS_COLON &kp SQT           // : (JIS け)
+#define JIS_SEMI  &kp SEMI          // ;
+#define JIS_HASH  &kp LS(N3)        // #
+#define JIS_LBKT  &kp RBKT          // [
+#define JIS_RBKT  &kp NON_US_HASH   // ]
+#define JIS_AMPS  &kp LS(N6)        // &
+#define JIS_PIPE  &kp LS(INT3)      // |
+#define JIS_LPAR  &kp LS(N8)        // (
+#define JIS_RPAR  &kp LS(N9)        // )
+#define JIS_TILDE &kp LS(EQUAL)     // ~
+#define JIS_DLLR  &kp LS(N4)        // $
+#define JIS_GRAVE &kp LS(LBKT)      // `
+#define JIS_AST   &kp LS(SQT)       // * (JIS Shift + :)
+#define JIS_PLUS  &kp LS(SEMI)      // +
+#define JIS_MINUS &kp MINUS         // -
 
 / {
     macros {
@@ -58,14 +56,15 @@
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <280>; // 200から280へ延長（誤爆防止）
+            quick-tap-ms = <175>;    // 同じキーを連打した時はタップを優先
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
         lt_s: layer_tap_shift {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <250>; // レイヤー切り替えも少し長めに
             flavor = "hold-preferred";
             bindings = <&mo>, <&kp>;
         };
@@ -98,9 +97,9 @@
 
         shift_layer {
             bindings = <
-&none    &kp LS(Q)  &kp LS(Z)  &kp LS(N7) &kp LS(N2) &kp LS(N1)  &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
+&none    &kp LS(Q)  &kp LS(Z)  &JIS_SQT   &JIS_DQT   &kp LS(N1)  &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
 &m_nn    &kp LS(E)  &kp LS(I)  &kp LS(O)  &kp LS(A)  &kp LS(U)   &kp LS(K)  &kp LS(T)  &kp LS(N)  &kp LS(S)  &kp LS(H)  &m_ltu
-&none    &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp LS(MINUS) &kp LS(F) &kp LS(G) &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
+&none    &kp LS(C)  &kp LS(L)  &kp LS(V)  JIS_EQL    &kp LS(F)   &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
@@ -117,8 +116,8 @@
         qwerty_shift_layer {
             bindings = <
 &none    &kp LS(Q)  &kp LS(W)  &kp LS(E)  &kp LS(R)  &kp LS(T)   &kp LS(Y)  &kp LS(U)  &kp LS(I)  &kp LS(O)  &kp LS(P)  &none
-&m_nn    &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)   &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  &kp LS(MINUS) &m_ltu
-&none    &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)   &kp LS(N)  &kp LS(M)  &kp LS(N7) &kp LS(N2) &kp LS(N1) &none
+&m_nn    &kp LS(A)  &kp LS(S)  &kp LS(D)  &kp LS(F)  &kp LS(G)   &kp LS(H)  &kp LS(J)  &kp LS(K)  &kp LS(L)  JIS_EQL    &m_ltu
+&none    &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)   &kp LS(N)  &kp LS(M)  JIS_SQT    JIS_DQT    &kp LS(N1) &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
@@ -126,7 +125,7 @@
         sym_num_layer {
             bindings = <
 &none    JIS_AT     JIS_LT     JIS_GT     JIS_SLASH  JIS_BSLH    &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
-&m_nn    JIS_EQL    &kp LS(N8) &kp LS(N9) JIS_DQT    JIS_SQT     &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
+&m_nn    JIS_EQL    JIS_LPAR   JIS_RPAR   JIS_DQT    JIS_SQT     &kp N1     &kp N2     &kp N3     &kp N4     &kp N5     &m_ltu
 &none    JIS_UNDR   JIS_CARET  JIS_PRCNT  JIS_COLON  JIS_SEMI    JIS_EQL    JIS_SLASH  JIS_AST    JIS_MINUS  JIS_PLUS   &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
