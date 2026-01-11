@@ -49,25 +49,30 @@
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-        // 16, 19番用：Shiftを維持しながらレイヤー切り替え
-        ls_mo: layer_shift_mo {
+
+        // レイヤー・タップ (350ms)
+        lt_c: layer_tap_custom {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <350>;
+            quick-tap-ms = <175>;
             flavor = "hold-preferred";
-            bindings = <&mo_sft>, <&kp>;
+            bindings = <&mo>, <&kp>;
         };
     };
 
-    // Shiftを押しっぱなしにするためのマクロ的挙動をレイヤーで制御
-    // (ここでは単純化のため、レイヤー自体にShiftを重畳させる)
-
     combos {
         compatible = "zmk,combos";
+        // 判定を厳しめに設定 (30ms)
         combo_lang2 { timeout-ms = <30>; key-positions = <14 15>; bindings = <&kp LANG2>; };
         combo_lang1 { timeout-ms = <30>; key-positions = <20 21>; bindings = <&kp LANG1>; };
         combo_to_qwerty { timeout-ms = <30>; key-positions = <13 14>; bindings = <&to L_QWE>; };
         combo_to_def { timeout-ms = <30>; key-positions = <21 22>; bindings = <&to L_DEF>; };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer { if-layers = <L_NUM L_ARR>; then-layer = <L_SYS>; };
     };
 
     keymap {
@@ -78,7 +83,7 @@
 &none    &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp LS(SLASH) &kp X      &kp W      &kp R      &kp Y      &kp P      &none
 &kp N    &hm LGUI E &hm LALT I &hm LCTRL O &hm LSHFT A &kp U       &kp K      &hm RSHFT T &hm RCTRL N &hm RALT S &hm RGUI H &kp L
 &none    &kp C      &kp L      &kp V      &kp MINUS  &kp F       &kp G      &kp D      &kp M      &kp J      &kp B      &none
-&none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
+&none    &none      &kp LANG2  &kp TAB    &lt_c L_NUM SPACE &lt_c L_ARR BSPC &kp RET    &kp LANG1  &none      &none
             >;
         };
 
@@ -96,7 +101,7 @@
 &none    &kp Q      &kp W      &kp E      &kp R      &kp T       &kp Y      &kp U      &kp I      &kp O      &kp P      &none
 &kp N    &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G       &kp H      &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI MINUS &kp L
 &none    &kp Z      &kp X      &kp C      &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp DOT    &kp LS(SLASH) &none
-&none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
+&none    &none      &kp LANG2  &kp TAB    &lt_c L_NUM SPACE &lt_c L_ARR BSPC &kp RET    &kp LANG1  &none      &none
             >;
         };
 
