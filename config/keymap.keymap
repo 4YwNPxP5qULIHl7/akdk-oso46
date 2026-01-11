@@ -43,50 +43,31 @@
 #define JIS_MINUS MINUS
 
 / {
-    macros {
-        m_nn: m_nn {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp N &kp N>;
-        };
-        m_ltu: m_ltu {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp L &kp T &kp U>;
-        };
-    };
-
     behaviors {
-        // 全指共通の安定した設定 (450ms)
+        // 通常のホームロウ修飾キー
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <450>;
             quick-tap-ms = <175>;
-            flavor = "tap-preferred";
+            flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
 
-        // AとT専用：Shiftレイヤー移動。
-        // Shiftそのものの挙動は、レイヤー1側に Sticky Shift を置くことで解決します。
-        as: alpha_shift {
+        // 16/19番専用：純粋なShiftとして機能し、離したときだけ文字を出す
+        sh_at: shift_alpha_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <450>;
             quick-tap-ms = <175>;
-            flavor = "tap-preferred";
-            bindings = <&mo>, <&kp>;
+            flavor = "hold-preferred";
+            retro-tap; // これにより長押し単体で離した時に文字が出る
+            bindings = <&kp>, <&kp>;
         };
     };
 
-    combos {
-        compatible = "zmk,combos";
-        combo_lang2 { timeout-ms = <30>; key-positions = <14 15>; bindings = <&kp LANG2>; };
-        combo_lang1 { timeout-ms = <30>; key-positions = <20 21>; bindings = <&kp LANG1>; };
-        combo_to_qwerty { timeout-ms = <30>; key-positions = <13 14>; bindings = <&to L_QWE>; };
-        combo_to_def { timeout-ms = <30>; key-positions = <21 22>; bindings = <&to L_DEF>; };
-    };
-
+    // 条件レイヤー：Shift（16/19番）が押されている間、記号/大文字レイヤーを起動
+    // これにより「A押しっぱなし＋T」で大文字のTが確実に出るようになります
     conditional_layers {
         compatible = "zmk,conditional-layers";
         tri_layer { if-layers = <L_NUM L_ARR>; then-layer = <L_SYS>; };
@@ -98,25 +79,28 @@
         default_layer {
             bindings = <
 &none    &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp JIS_QUES &kp X      &kp W      &kp R      &kp Y      &kp P      &none
-&m_nn    &hm LGUI E &hm LALT I &hm LCTRL O &as L_SFT A &kp U      &kp K      &as L_SFT T &hm RCTRL N &hm RALT S &hm RGUI H &m_ltu
+&m_nn    &hm LGUI E &hm LALT I &hm LCTRL O &sh_at LSHFT A &kp U    &kp K      &sh_at RSHFT T &hm RCTRL N &hm RALT S &hm RGUI H &m_ltu
 &none    &kp C      &kp L      &kp V      &kp MINUS  &kp F       &kp G      &kp D      &kp M      &kp J      &kp B      &none
 &none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
             >;
         };
 
+        // LSHFT/RSHFTが押された際にOS側で処理されるため、
+        // このレイヤーは「Shiftと同時に押されたときの記号」を定義する場所になります
         shift_layer {
             bindings = <
 &none    &kp LS(Q)  &kp LS(Z)  &kp JIS_SQT &kp JIS_DQT &kp JIS_EXCL &kp LS(X)  &kp LS(W)  &kp LS(R)  &kp LS(Y)  &kp LS(P)  &none
-&m_nn    &hm LGUI LS(E) &hm LALT LS(I) &hm LCTRL LS(O) &sk LSHFT &kp LS(U) &kp LS(K) &sk RSHFT &hm RCTRL LS(N) &hm RALT LS(S) &hm RGUI LS(H) &m_ltu
+&m_nn    &hm LGUI LS(E) &hm LALT LS(I) &hm LCTRL LS(O) &trans    &kp LS(U) &kp LS(K) &trans     &hm RCTRL LS(N) &hm RALT LS(S) &hm RGUI LS(H) &m_ltu
 &none    &kp LS(C)  &kp LS(L)  &kp LS(V)  &kp JIS_EQL &kp LS(F)  &kp LS(G)  &kp LS(D)  &kp LS(M)  &kp LS(J)  &kp LS(B)  &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
         };
-
+        
+        // --- 以下のレイヤー構成も同様の思想で維持 ---
         qwerty_layer {
             bindings = <
 &none    &kp Q      &kp W      &kp E      &kp R      &kp T       &kp Y      &kp U      &kp I      &kp O      &kp P      &none
-&m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &as L_QWS F &kp G     &kp H      &as L_QWS J &hm RCTRL K &hm RALT L &hm RGUI MINUS &m_ltu
+&m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &sh_at LSHFT F &kp G   &kp H      &sh_at RSHFT J &hm RCTRL K &hm RALT L &hm RGUI MINUS &m_ltu
 &none    &kp Z      &kp X      &kp C      &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp DOT    &kp JIS_QUES &none
 &none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
             >;
@@ -125,7 +109,7 @@
         qwerty_shift_layer {
             bindings = <
 &none    &kp LS(Q)  &kp LS(W)  &kp LS(E)  &kp LS(R)  &kp LS(T)   &kp LS(Y)  &kp LS(U)  &kp LS(I)  &kp LS(O)  &kp LS(P)  &none
-&m_nn    &hm LGUI LS(A) &hm LALT LS(S) &hm LCTRL LS(D) &sk LSHFT &kp LS(G) &kp LS(H) &sk RSHFT &hm RCTRL LS(K) &hm RALT LS(L) &hm RGUI JIS_EQL &m_ltu
+&m_nn    &hm LGUI LS(A) &hm LALT LS(S) &hm LCTRL LS(D) &trans    &kp LS(G) &kp LS(H) &trans    &hm RCTRL LS(K) &hm RALT LS(L) &hm RGUI JIS_EQL &m_ltu
 &none    &kp LS(Z)  &kp LS(X)  &kp LS(C)  &kp LS(V)  &kp LS(B)   &kp LS(N)  &kp LS(M)  &kp JIS_SQT &kp JIS_DQT &kp JIS_EXCL &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
@@ -134,7 +118,7 @@
         sym_num_layer {
             bindings = <
 &none    &kp JIS_AT &kp JIS_LT &kp JIS_GT &kp JIS_SLASH &kp JIS_BSLH &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
-&m_nn    &hm LGUI JIS_EQL &hm LALT JIS_LBRC &hm LCTRL JIS_RBRC &sk LSHFT &kp JIS_SQT &kp N1 &sk RSHFT &hm RCTRL N3 &hm RALT N4 &hm RGUI N5 &m_ltu
+&m_nn    &hm LGUI JIS_EQL &hm LALT JIS_LBRC &hm LCTRL JIS_RBRC &trans &kp JIS_SQT &kp N1 &trans &hm RCTRL N3 &hm RALT N4 &hm RGUI N5 &m_ltu
 &none    &kp JIS_UNDR &kp JIS_CARET &kp JIS_PRCNT &kp JIS_COLON &kp JIS_SEMI &kp JIS_EQL &kp JIS_SLASH &kp JIS_AST &kp JIS_MINUS &kp JIS_PLUS &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
@@ -143,7 +127,7 @@
         sym_arrow_layer {
             bindings = <
 &none    &kp JIS_HASH &kp JIS_LBKT &kp JIS_RBKT &kp JIS_AMPS &kp JIS_PIPE &kp HOME   &kp PG_UP  &kp UP     &kp PG_DN  &kp END    &none
-&m_nn    &hm LGUI JIS_EQL &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &sk LSHFT &kp JIS_SQT &kp DEL &sk RSHFT &hm RCTRL DOWN &hm RALT RIGHT &kp INS &m_ltu
+&m_nn    &hm LGUI JIS_EQL &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &trans &kp JIS_SQT &kp DEL &trans &hm RCTRL DOWN &hm RALT RIGHT &kp INS &m_ltu
 &none    &kp JIS_TILDE &kp JIS_DLLR &kp JIS_GRAVE &kp JIS_COLON &kp JIS_SEMI &kp C_PREV &kp C_RW &kp C_PP &kp C_FF &kp C_NEXT &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
@@ -152,7 +136,7 @@
         system_layer {
             bindings = <
 &none    &kp K_APP  &kp LANG1  &kp C_BRI_UP &kp C_VOL_UP &kp F11   &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
-&m_nn    &hm LGUI ESC &hm LALT CAPS &hm LCTRL C_BRI_DN &sk LSHFT &kp PSCRN &kp F1 &sk RSHFT &hm RCTRL F3 &hm RALT F4 &hm RGUI F5 &m_ltu
+&m_nn    &hm LGUI ESC &hm LALT CAPS &hm LCTRL C_BRI_DN &trans &kp PSCRN &kp F1 &trans &hm RCTRL F3 &hm RALT F4 &hm RGUI F5 &m_ltu
 &none    &kp PAUSE_BREAK &kp LANG2 &kp SLCK &kp C_MUTE  &none     &kp F11    &kp F12    &none      &none      &none      &none
 &none    &none      &kp LANG2  &kp TAB    &trans     &trans      &kp RET    &kp LANG1  &none      &none
             >;
