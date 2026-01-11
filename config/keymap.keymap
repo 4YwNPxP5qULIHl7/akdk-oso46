@@ -2,42 +2,43 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-// レイヤー定義（数字で管理）
-#define DEFAULT 0
-#define SHIFT   1
-#define QWERTY  2
-#define Q_SHIFT 3
-#define SYM_NUM 4
-#define SYM_ARR 5
-#define SYSTEM  6
+// レイヤーインデックス
+#define L_DEF 0
+#define L_SFT 1
+#define L_QWE 2
+#define L_QSFT 3
+#define L_NUM 4
+#define L_ARR 5
+#define L_SYS 6
 
 / {
     macros {
         mc_nn: mc_nn {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            tap-ms = <30>;
+            wait-ms = <30>;
             bindings = <&kp N &kp N>;
         };
         mc_ltu: mc_ltu {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
+            tap-ms = <30>;
+            wait-ms = <30>;
             bindings = <&kp L &kp T &kp U>;
         };
     };
 
     behaviors {
-        // 通常のホームローMod
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             label = "HOMEROW_MODS";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
-            quick-tap-ms = <0>;
+            quick-tap-ms = <175>;
             flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
         };
-        // シフトレイヤー切り替え用のカスタムHold-Tap
-        // ホールドでレイヤー(mo)、タップでキー(kp)
         shmt: shift_mod_tap {
             compatible = "zmk,behavior-hold-tap";
             label = "SHIFT_MOD_TAP";
@@ -50,16 +51,16 @@
 
     combos {
         compatible = "zmk,combos";
-        // 14, 15 で LANG2
+        // LANG2 (L-ALT + L-CTRL)
         combo_lang2 { timeout-ms = <50>; key-positions = <14 15>; bindings = <&kp LANG2>; };
-        // 20, 21 で LANG1
+        // LANG1 (R-CTRL + R-ALT)
         combo_lang1 { timeout-ms = <50>; key-positions = <20 21>; bindings = <&kp LANG1>; };
-        // 13, 14 で QWERTYへ移動
-        combo_to_qwerty { timeout-ms = <50>; key-positions = <13 14>; bindings = <&to QWERTY>; };
-        // 21, 22 で DEFAULTへ移動
-        combo_to_default { timeout-ms = <50>; key-positions = <21 22>; bindings = <&to DEFAULT>; };
-        // 40, 41 同時押しで SYSTEMレイヤー
-        combo_system { timeout-ms = <50>; key-positions = <40 41>; bindings = <&mo SYSTEM>; };
+        // QWERTY遷移 (L-GUI + L-ALT)
+        combo_to_qwerty { timeout-ms = <50>; key-positions = <13 14>; bindings = <&to L_QWE>; };
+        // Default遷移 (R-ALT + R-GUI)
+        combo_to_default { timeout-ms = <50>; key-positions = <21 22>; bindings = <&to L_DEF>; };
+        // SYSTEMレイヤー (Sp + Bs)
+        combo_system { timeout-ms = <50>; key-positions = <40 41>; bindings = <&mo L_SYS>; };
     };
 
     keymap {
@@ -68,9 +69,9 @@
         default_layer {
             bindings = <
 &none      &kp Q        &kp Z        &kp COMMA    &kp DOT      &kp SLASH     &kp X        &kp W        &kp R        &kp Y        &kp P        &none
-&mc_nn     &hm LGUI E   &hm LALT I   &hm LCTRL O  &shmt SHIFT A &kp U        &kp K        &shmt SHIFT T &hm RCTRL N  &hm RALT S   &hm RGUI H   &mc_ltu
+&mc_nn     &hm LGUI E   &hm LALT I   &hm LCTRL O  &shmt L_SFT A &kp U        &kp K        &shmt L_SFT T &hm RCTRL N  &hm RALT S   &hm RGUI H   &mc_ltu
 &none      &kp C        &kp L        &kp V        &kp MINUS    &kp F         &kp G        &kp D        &kp M        &kp J        &kp B        &none
-&none      &none        &kp LANG2    &kp TAB      &lt SYM_NUM SPACE &lt SYM_ARR BSPC &kp RET &kp LANG1    &none        &none
+&none      &none        &kp LANG2    &kp TAB      &lt L_NUM SPACE &lt L_ARR BSPC &kp RET  &kp LANG1    &none        &none
             >;
         };
 
@@ -86,9 +87,9 @@
         qwerty_layer {
             bindings = <
 &none      &kp Q        &kp W        &kp E        &kp R        &kp T         &kp Y        &kp U        &kp I        &kp O        &kp P        &none
-&mc_nn     &hm LGUI A   &hm LALT S   &hm LCTRL D  &shmt Q_SHIFT F &kp G      &kp H        &shmt Q_SHIFT J &hm RCTRL K  &hm RALT L   &hm RGUI MINUS &mc_ltu
+&mc_nn     &hm LGUI A   &hm LALT S   &hm LCTRL D  &shmt L_QSFT F &kp G       &kp H        &shmt L_QSFT J &hm RCTRL K  &hm RALT L   &hm RGUI MINUS &mc_ltu
 &none      &kp Z        &kp X        &kp C        &kp V        &kp B         &kp N        &kp M        &kp COMMA    &kp DOT      &kp SLASH    &none
-&none      &none        &kp LANG2    &kp TAB      &lt SYM_NUM SPACE &lt SYM_ARR BSPC &kp RET &kp LANG1    &none        &none
+&none      &none        &kp LANG2    &kp TAB      &lt L_NUM SPACE &lt L_ARR BSPC &kp RET  &kp LANG1    &none        &none
             >;
         };
 
