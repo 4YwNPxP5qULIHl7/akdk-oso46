@@ -54,15 +54,10 @@
             #binding-cells = <0>;
             bindings = <&kp L &kp T &kp U>;
         };
-        // ホールド時にShiftとレイヤー切り替えを同時に行うマクロ
-        mo_sft: mo_sft {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings = <&macro_param_1to1>, <&macro_pause_for_release>, <&macro_tap &mo MACRO_PLACEHOLDER &kp LSHFT>;
-        };
     };
 
     behaviors {
+        // 通常のホームロウ（GUI/ALT/CTRL用）
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -72,27 +67,31 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // 16/19番専用: ホールド時に「Shift+レイヤー」、タップで「文字」
-        // retro-tapにより文字入力を確実にし、Hold側でレイヤーもShiftも発動させます
-        as_ht: alpha_shift_layer_tap {
+        // 16/19番専用: Holdでレイヤー移動＋Shift修飾、Tapで文字
+        // &mo と &kp LSHFT を一つのHoldアクションにまとめる
+        ls_mo: layer_shift_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <450>;
+            tapping-term-ms = <400>;
             quick-tap-ms = <175>;
-            flavor = "balanced";
+            flavor = "hold-preferred";
             retro-tap;
-            bindings = <&sl_mo>, <&kp>;
+            bindings = <&mo_sft>, <&kp>;
         };
 
-        // 指定レイヤー移動とShiftを同時に行う特殊挙動
-        sl_mo: sl_mo {
+        // レイヤー切り替えとShiftを同時に行うマクロ的な挙動
+        mo_sft: mo_sft {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <0>; // 即座に発動
-            bindings = <&mo>, <&kp>;
-            // 第1引数にレイヤー、第2引数にLSHFTを渡す
+            tapping-term-ms = <0>;
+            bindings = <&mo>, <&kp>; 
         };
     };
+
+    // レイヤー移動とShiftを同時に行うショートカット定義
+    // ここで L_SFTレイヤーへの移行と LSHFTの送信をセットにします
+    #define MO_SFT_1 &mo_sft L_SFT LSHFT
+    #define MO_SFT_3 &mo_sft L_QWS LSHFT
 
     combos {
         compatible = "zmk,combos";
@@ -113,7 +112,7 @@
         default_layer {
             bindings = <
 &none    &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp JIS_QUES &kp X      &kp W      &kp R      &kp Y      &kp P      &none
-&m_nn    &hm LGUI E &hm LALT I &hm LCTRL O &as_ht L_SFT A &kp U    &kp K      &as_ht L_SFT T &hm RCTRL N &hm RALT S &hm RGUI H &m_ltu
+&m_nn    &hm LGUI E &hm LALT I &hm LCTRL O &ls_mo L_SFT A &kp U    &kp K      &ls_mo L_SFT T &hm RCTRL N &hm RALT S &hm RGUI H &m_ltu
 &none    &kp C      &kp L      &kp V      &kp MINUS  &kp F       &kp G      &kp D      &kp M      &kp J      &kp B      &none
 &none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
             >;
@@ -131,7 +130,7 @@
         qwerty_layer {
             bindings = <
 &none    &kp Q      &kp W      &kp E      &kp R      &kp T       &kp Y      &kp U      &kp I      &kp O      &kp P      &none
-&m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &as_ht L_QWS F &kp G   &kp H      &as_ht L_QWS J &hm RCTRL K &hm RALT L &hm RGUI MINUS &m_ltu
+&m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &ls_mo L_QWS F &kp G   &kp H      &ls_mo L_QWS J &hm RCTRL K &hm RALT L &hm RGUI MINUS &m_ltu
 &none    &kp Z      &kp X      &kp C      &kp V      &kp B       &kp N      &kp M      &kp COMMA  &kp DOT    &kp JIS_QUES &none
 &none    &none      &kp LANG2  &kp TAB    &lt L_NUM SPACE &lt L_ARR BSPC &kp RET    &kp LANG1  &none      &none
             >;
