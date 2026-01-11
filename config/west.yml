@@ -7,7 +7,7 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: stable  # ここを v3.2 から stable に変更
+      revision: 19163625b293f06c39f99f191b6e4e56598357f0  # 2024年後半の安定した地点を指定
       import: app/west.yml
   self:
     path: config
