@@ -97,7 +97,7 @@
         arrow_layer {
             bindings = <
 &none    &kp LS(N3)   &kp JIS_LBKT  &kp JIS_RBKT &kp LS(N6)   &kp JIS_PIPE &kp DEL    &kp PG_UP  &kp UP     &kp PG_DN  &kp INS    &none
-&m_nn    &hm LGUI JIS_EQL &hm LALT LS(N8) &hm LCTRL LS(N9)  &hm LSHFT LS(SLASH) &kpLS(N1) &kp HOME   &kp LEFT   &kp DOWN   &kp RIGHT  &kp END    &m_ltu
+&m_nn    &hm LGUI JIS_EQL &hm LALT LS(N8) &hm LCTRL LS(N9)  &hm LSHFT LS(SLASH) &kp LS(N1) &kp HOME   &kp LEFT   &kp DOWN   &kp RIGHT  &kp END    &m_ltu
 &none    &kp JIS_TILDE &kp LS(N4)    &kp JIS_GRV  &kp JIS_COLON &kp JIS_SEMI &none      &kp C_PREV &kp C_PP   &kp C_NEXT &none      &none
 &none    &none      &kp LANG2  &kp TAB    &trans       &trans       &kp RET    &kp LANG1  &none      &none
             >;
