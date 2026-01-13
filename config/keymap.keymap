@@ -88,8 +88,8 @@
         symbol_num_layer {
             bindings = <
 &none    &kp JIS_AT   &kp LS(COMMA) &kp LS(DOT) &kp SLASH    &kp JIS_BSLH &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
-&m_nn    &hm LGUI JIS_EQL &hm LALT JIS_LBRC &hm LCTRL JIS_RBRC &hm LSHFT JIS_DQUOT &kp JIS_QUOT &kp N1 &hm RSHFT N2 &hm RCTRL N3 &hm RALT N4 &hm RGUI N5 &m_ltu
-&none    &kp JIS_UNDR &kp JIS_CARET &kp LS(N5)   &kp JIS_COLON &kp JIS_SEMI &kp JIS_EQL &kp SLASH &kp LS(SQT) &kp MINUS &kp LS(SEMI) &none
+&m_nn    &hm LGUI JIS_EQL &hm LALT JIS_LBRC &hm LCTRL COMMA &hm LSHFT DOT &kp JIS_QUOT &kp N1 &hm RSHFT N2 &hm RCTRL N3 &hm RALT N4 &hm RGUI N5 &m_ltu
+&none    &kp JIS_UNDR &kp JIS_CARET &kp LS(N5)   &kp JIS_RBRC &kp JIS_DQUOT &kp JIS_EQL &kp SLASH &kp LS(SQT) &kp MINUS &kp LS(SEMI) &none
 &none    &none      &kp LANG2  &kp TAB    &trans       &trans       &kp RET    &kp LANG1  &none      &none
             >;
         };
