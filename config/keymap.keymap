@@ -56,8 +56,8 @@
 
         layers = <L_DEF L_QWE>;
 
-        combo_lang2 { timeout-ms = <30>; key-positions = <3 4>; bindings = <&kp LANG2>; };
-        combo_lang1 { timeout-ms = <30>; key-positions = <7 8>; bindings = <&kp LANG1>; };
+        combo_lang2 { timeout-ms = <30>; key-positions = <4 5>; bindings = <&kp LANG2>; };
+        combo_lang1 { timeout-ms = <30>; key-positions = <8 9>; bindings = <&kp LANG1>; };
         combo_to_qwerty { timeout-ms = <30>; key-positions = <3 4 5>; bindings = <&to L_QWE>; };
         combo_to_def { timeout-ms = <30>; key-positions = <7 8 9>; bindings = <&to L_DEF>; };
     };
@@ -75,7 +75,7 @@
 &none    &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp SLASH  &kp X      &kp W      &kp R      &kp Y      &kp P      &none
 &m_nn    &hm LGUI E &hm LALT I &hm LCTRL O &hm LSHFT A &kp U     &kp K      &hm RSHFT T &hm RCTRL N &hm RALT S &hm RGUI H &m_ltu
 &none    &kp C      &kp L      &kp V      &kp MINUS  &kp F      &kp G      &kp D      &kp M      &kp J      &kp B      &none
-&none    &none      &kp LANG2  &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET &kp LANG1 &none      &none
+&none    &none      &none  &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET &none &none      &none
             >;
         };
 
@@ -84,7 +84,7 @@
 &none    &kp Q      &kp W      &kp E      &kp R      &kp T      &kp Y      &kp U      &kp I      &kp O      &kp P      &none
 &m_nn    &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G    &kp H      &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI MINUS &m_ltu
 &none    &kp Z      &kp X      &kp C      &kp V      &kp B      &kp N      &kp M      &kp COMMA  &kp DOT    &kp SLASH  &none
-&none    &none      &kp LANG2  &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET &kp LANG1 &none      &none
+&none    &none      &none  &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET &none &none      &none
             >;
         };
 
@@ -93,7 +93,7 @@
 &none    &kp JIS_AT   &kp LS(COMMA) &kp LS(DOT) &kp SLASH    &kp JIS_BSLH &kp N6     &kp N7     &kp N8     &kp N9     &kp N0     &none
 &m_nn    &hm LGUI JIS_EQL &hm LALT JIS_LBRC &hm LCTRL JIS_RBRC &hm LSHFT DOT &kp COMMA &kp N1 &hm RSHFT N2 &hm RCTRL N3 &hm RALT N4 &hm RGUI N5 &m_ltu
 &none    &kp JIS_UNDR &kp LS(N4)    &kp LS(N5)  &kp JIS_COLON &kp JIS_SEMI &kp JIS_EQL &kp SLASH &kp LS(SQT) &kp MINUS &kp LS(SEMI) &none
-&none    &none      &kp LANG2  &kp TAB    &trans       &trans       &kp RET    &kp LANG1  &none      &none
+&none    &none      &none  &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET &none &none      &none
             >;
         };
 
@@ -102,7 +102,7 @@
 &none    &kp LS(N3)   &kp JIS_LBKT  &kp JIS_RBKT &kp LS(N6)   &kp JIS_PIPE &kp DEL    &kp PG_UP  &kp UP     &kp PG_DN  &kp INS    &none
 &m_nn    &hm LGUI JIS_EQL &hm LALT LS(N8) &hm LCTRL LS(N9)  &hm LSHFT LS(SLASH) &kp LS(N1) &kp HOME   &kp LEFT   &kp DOWN   &kp RIGHT  &kp END    &m_ltu
 &none    &kp JIS_TILDE &kp JIS_CARET &kp JIS_GRV   &kp JIS_DQUOT &kp JIS_QUOT &none      &kp C_PREV &kp C_PP   &kp C_NEXT &none      &none
-&none    &none      &kp LANG2  &kp TAB    &trans       &trans       &kp RET    &kp LANG1  &none      &none
+&none    &none      &none  &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET &none &none      &none
             >;
         };
 
@@ -111,7 +111,7 @@
 &none    &kp K_APP  &kp LANG1  &kp C_BRI_UP &kp C_VOL_UP &none    &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
 &m_nn    &hm LGUI ESC &hm LALT CAPS &hm LCTRL C_BRI_DN &hm LSHFT C_VOL_DN &kp PSCRN &kp F1 &hm RSHFT F2 &hm RCTRL F3 &hm RALT F4 &hm RGUI F5 &m_ltu
 &none    &kp PAUSE_BREAK &kp LANG2 &kp SLCK &kp C_MUTE &none      &kp F11    &kp F12    &none      &none      &none      &none
-&none    &none      &kp LANG2  &kp TAB    &trans     &trans     &kp RET    &kp LANG1  &none      &none
+&none    &none      &none  &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET &none &none      &none
             >;
         };
     };
