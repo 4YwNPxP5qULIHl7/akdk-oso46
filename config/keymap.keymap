@@ -53,6 +53,9 @@
 
     combos {
         compatible = "zmk,combos";
+
+        layers = <L_DEF L_QWE>;
+
         combo_lang2 { timeout-ms = <30>; key-positions = <3 4>; bindings = <&kp LANG2>; };
         combo_lang1 { timeout-ms = <30>; key-positions = <7 8>; bindings = <&kp LANG1>; };
         combo_to_qwerty { timeout-ms = <30>; key-positions = <3 4 5>; bindings = <&to L_QWE>; };
