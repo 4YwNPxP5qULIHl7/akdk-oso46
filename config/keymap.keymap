@@ -109,9 +109,9 @@
 
         system_layer {
             bindings = <
-&none    &kp K_APP  &kp LANG1  &kp C_BRI_UP &kp C_VOL_UP &none    &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
+&none    &kp K_APP  &kp INT4  &kp C_BRI_UP &kp C_VOL_UP &none    &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
 &none    &hm LGUI ESC &hm LALT CAPS &hm LCTRL C_BRI_DN &hm LSHFT C_VOL_DN &kp PSCRN &kp F1 &hm RSHFT F2 &hm RCTRL F3 &hm RALT F4 &hm RGUI F5 &none
-&none    &kp PAUSE_BREAK &kp LANG2 &kp SLCK &kp C_MUTE &none      &kp F11    &kp F12    &none      &none      &none      &none
+&none    &kp PAUSE_BREAK &kp INT5 &kp SLCK &kp C_MUTE &none      &kp F11    &kp F12    &none      &none      &none      &none
 &none    &none      &none      &kp TAB    &trans       &trans       &kp RET    &none      &none      &none
             >;
         };
