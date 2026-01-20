@@ -53,7 +53,6 @@
 
     combos {
         compatible = "zmk,combos";
-        // デフォルトとQwertyレイヤーでのみコンボを有効化
         layers = <L_DEF L_QWE>;
 
         combo_lang2 { timeout-ms = <30>; key-positions = <2 3>; bindings = <&kp LANG2>; };
@@ -64,7 +63,6 @@
 
     conditional_layers {
         compatible = "zmk,conditional-layers";
-        // SYMとARRを同時に押すとSYSレイヤーへ
         tri_layer { if-layers = <L_SYM L_ARR>; then-layer = <L_SYS>; };
     };
 
@@ -73,18 +71,18 @@
 
         default_layer {
             bindings = <
-&none    &kp Q      &kp Z      &kp COMMA  &kp DOT    &kp SLASH  &kp X      &kp W      &kp R      &kp Y      &kp P      &none
-&m_ltu   &hm LGUI E &hm LALT I &hm LCTRL O &hm LSHFT A &kp U     &kp K      &hm RSHFT T &hm RCTRL N &hm RALT S &hm RGUI H &none
-&m_nn    &kp C      &kp L      &kp V      &kp MINUS  &kp F      &kp G      &kp D      &kp M      &kp J      &kp B      &none
+&none    &kp Q      &kp C      &kp L      &kp COMMA  &kp DOT    &kp F      &kp W      &kp R      &kp Y      &kp P      &kp V
+&m_ltu   &hm LGUI E &hm LALT I &hm LCTRL O &hm LSHFT A &kp U     &kp K      &hm RSHFT T &hm RCTRL N &hm RALT S &hm RGUI H &kp Z
+&m_nn    &kp X      &kp JIS_COLON &kp JIS_SEMI &kp MINUS &kp SLASH &kp G      &kp D      &kp M      &kp J      &kp B      &kp JIS_BSLH
 &none    &none      &none      &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET    &none      &none      &none
             >;
         };
 
         qwerty_layer {
             bindings = <
-&none    &kp Q      &kp W      &kp E      &kp R      &kp T      &kp Y      &kp U      &kp I      &kp O      &kp P      &none
-&m_ltu   &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G    &kp H      &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI MINUS &none
-&m_nn    &kp Z      &kp X      &kp C      &kp V      &kp B      &kp N      &kp M      &kp COMMA  &kp DOT    &kp SLASH  &none
+&none    &kp Q      &kp W      &kp E      &kp R      &kp T      &kp Y      &kp U      &kp I      &kp O      &kp P      &kp MINUS
+&m_ltu   &hm LGUI A &hm LALT S &hm LCTRL D &hm LSHFT F &kp G    &kp H      &hm RSHFT J &hm RCTRL K &hm RALT L &hm RGUI JIS_SEMI &kp JIS_COLON
+&m_nn    &kp Z      &kp X      &kp C      &kp V      &kp B      &kp N      &kp M      &kp COMMA  &kp DOT    &kp SLASH  &kp JIS_BSLH
 &none    &none      &none      &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET    &none      &none      &none
             >;
         };
@@ -109,9 +107,9 @@
 
         system_layer {
             bindings = <
-&none    &kp K_APP  &kp INT4  &kp C_BRI_UP &kp C_VOL_UP &none    &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
+&none    &kp K_APP  &kp INT4   &kp C_BRI_UP &kp C_VOL_UP &none    &kp F6     &kp F7     &kp F8     &kp F9     &kp F10    &none
 &none    &hm LGUI ESC &hm LALT CAPS &hm LCTRL C_BRI_DN &hm LSHFT C_VOL_DN &kp PSCRN &kp F1 &hm RSHFT F2 &hm RCTRL F3 &hm RALT F4 &hm RGUI F5 &none
-&none    &kp PAUSE_BREAK &kp INT5 &kp SLCK &kp C_MUTE &none      &kp F11    &kp F12    &none      &none      &none      &none
+&none    &kp PAUSE_BREAK &kp INT5  &kp SLCK   &kp C_MUTE &none    &kp F11    &kp F12    &none      &none      &none      &none
 &none    &none      &none      &kp TAB    &trans       &trans       &kp RET    &none      &none      &none
             >;
         };
