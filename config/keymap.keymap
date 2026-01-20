@@ -44,7 +44,7 @@
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <200>;
+            tapping-term-ms = <400>;
             quick-tap-ms = <175>;
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
@@ -53,10 +53,10 @@
 
     combos {
         compatible = "zmk,combos";
-        combo_lang2 { timeout-ms = <40>; key-positions = <15 16>; bindings = <&kp LANG2>; };
-        combo_lang1 { timeout-ms = <40>; key-positions = <19 20>; bindings = <&kp LANG1>; };
-        combo_to_qwerty { timeout-ms = <40>; key-positions = <14 15 16>; bindings = <&to L_QWE>; };
-        combo_to_def { timeout-ms = <40>; key-positions = <19 20 21>; bindings = <&to L_DEF>; };
+        combo_lang2 { timeout-ms = <30>; key-positions = <3 4>; bindings = <&kp LANG2>; };
+        combo_lang1 { timeout-ms = <30>; key-positions = <7 8>; bindings = <&kp LANG1>; };
+        combo_to_qwerty { timeout-ms = <30>; key-positions = <3 4 5>; bindings = <&to L_QWE>; };
+        combo_to_def { timeout-ms = <30>; key-positions = <7 8 9>; bindings = <&to L_DEF>; };
     };
 
     conditional_layers {
