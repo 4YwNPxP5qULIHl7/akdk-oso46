@@ -73,7 +73,7 @@
             bindings = <
 &none    &kp Q      &kp C      &kp L      &kp COMMA  &kp DOT    &kp F      &kp W      &kp R      &kp Y      &kp P      &kp V
 &m_ltu   &hm LGUI E &hm LALT I &hm LCTRL O &hm LSHFT A &kp U     &kp K      &hm RSHFT T &hm RCTRL N &hm RALT S &hm RGUI H &kp Z
-&m_nn    &kp X      &kp JIS_COLON &kp JIS_SEMI &kp MINUS &kp SLASH &kp G      &kp D      &kp M      &kp J      &kp B      &kp JIS_BSLH
+&m_nn    &kp X      &kp JIS_SEMI &kp JIS_COLON &kp MINUS &kp SLASH &kp G      &kp D      &kp M      &kp J      &kp B      &kp JIS_BSLH
 &none    &none      &none      &kp TAB    &lt L_SYM SPACE &lt L_ARR BSPC &kp RET    &none      &none      &none
             >;
         };
