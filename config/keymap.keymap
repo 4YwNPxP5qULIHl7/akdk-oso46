@@ -10,10 +10,10 @@
 #define L_SYS 5
 #define L_TAB 6
 
-// --- JIS配列環境用定義 (逆引きマッピング) ---
+// --- JIS配列環境用：徹底修正版 ---
 #define JIS_CARET EQUAL       // ^
 #define JIS_AMPS  LS(N6)      // &
-#define JIS_ASTRK LS(JIS_CARET) // *
+#define JIS_ASTRK LS(SQT)     // * (JIS配列では「:」のシフト)
 #define JIS_LPAR  LS(N8)      // (
 #define JIS_RPAR  LS(N9)      // )
 #define JIS_EQL   LS(MINUS)   // =
@@ -70,7 +70,7 @@
         default_layer {
             bindings = <
 &none        &kp Q         &kp C         &kp L          &kp COMMA      &kp DOT        &kp F        &kp W          &kp R          &kp Y         &kp P          &kp V
-&kp LSHFT    &hm LGUI E    &hm LALT I    &hm LCTRL O    &hm LSHFT A    &kp U          &kp K        &hm RSHFT T    &hm RCTRL N    &hm RALT S    &hm RGUI H     &kp RSHFT
+&kp LSHFT &hm LGUI E    &hm LALT I    &hm LCTRL O    &hm LSHFT A    &kp U          &kp K        &hm RSHFT T    &hm RCTRL N    &hm RALT S    &hm RGUI H     &hm RSHFT Z
 &none        &kp X         &kp JIS_COLON &kp JIS_SEMI   &kp MINUS      &kp SLASH      &kp G        &kp D          &kp M          &kp J         &kp B          &kp JIS_QUOT
 &none        &none         &none         &lt L_TAB TAB  &lt L_NUM SPACE &lt L_SYM BSPC &lt L_SHT RET &none         &none          &none
             >;
@@ -79,7 +79,7 @@
         qwerty_layer {
             bindings = <
 &none        &kp Q         &kp W         &kp E          &kp R          &kp T          &kp Y        &kp U          &kp I          &kp O         &kp P          &kp MINUS
-&kp LSHFT    &hm LGUI A    &hm LALT S    &hm LCTRL D    &hm LSHFT F    &kp G          &kp H        &hm RSHFT J    &hm RCTRL K    &hm RALT L    &hm RGUI JIS_SEMI &kp RSHFT
+&kp LSHFT &hm LGUI A    &hm LALT S    &hm LCTRL D    &hm LSHFT F    &kp G          &kp H        &hm RSHFT J    &hm RCTRL K    &hm RALT L    &hm RGUI JIS_SEMI &hm RSHFT JIS_COLON
 &none        &kp Z         &kp X         &kp C          &kp V          &kp B          &kp N        &kp M          &kp COMMA      &kp DOT       &kp SLASH      &kp JIS_QUOT
 &none        &none         &none         &lt L_TAB TAB  &lt L_NUM SPACE &lt L_SYM BSPC &lt L_SHT RET &none         &none          &none
             >;
@@ -88,7 +88,7 @@
         num_sym_layer {
             bindings = <
 &kp JIS_CARET &kp JIS_DLLR  &kp JIS_LT    &kp JIS_GT     &kp JIS_PLUS   &kp JIS_ASTRK  &kp N6       &kp N7         &kp N8         &kp N9        &kp N0         &kp JIS_TILDE
-&kp LSHFT    &hm LGUI JIS_EXCL &hm LALT COMMA &hm LCTRL DOT &hm LSHFT MINUS &kp SLASH &kp N1 &hm RSHFT N2   &hm RCTRL N3   &hm RALT N4   &hm RGUI N5    &kp RSHFT
+&hm LSHFT HASH &hm LGUI JIS_EQL &hm LALT COMMA &hm LCTRL DOT &hm LSHFT MINUS &kp SLASH &kp N1 &hm RSHFT N2   &hm RCTRL N3   &hm RALT N4   &hm RGUI N5    &hm RSHFT JIS_UNDR
 &kp JIS_AT    &kp JIS_BSLH  &kp JIS_PIPE  &kp JIS_AMPS   &kp JIS_PRCNT  &kp JIS_GRV    &kp JIS_EXCL &kp JIS_QMARK  &kp JIS_QUOT   &kp JIS_DQUOT &kp JIS_SEMI   &kp JIS_COLON
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
@@ -97,7 +97,7 @@
         sym_arr_layer {
             bindings = <
 &kp JIS_PIPE &kp JIS_AMPS  &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_SEMI   &kp JIS_COLON  &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &none
-&kp LSHFT    &hm LGUI JIS_EQL &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &hm LSHFT JIS_QMARK &kp JIS_EXCL &kp HOME &kp LEFT &kp DOWN &kp RIGHT &kp END        &kp RSHFT
+&hm LSHFT JIS_DLLR &hm LGUI JIS_EQL &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &hm LSHFT JIS_QMARK &kp JIS_EXCL &kp HOME &kp LEFT &kp DOWN &kp RIGHT &kp END        &kp RSHFT
 &kp JIS_TILDE &kp JIS_UNDR  &kp JIS_LBRC  &kp JIS_RBRC   &kp JIS_QUOT   &kp JIS_DQUOT  &none        &kp INT5       &kp CAPS       &kp INT4      &none          &none
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
@@ -106,7 +106,7 @@
         shortcut_arr_layer {
             bindings = <
 &kp LS(LC(I)) &kp LS(LC(W)) &kp LC(S)     &kp LC(X)      &kp LC(F)      &kp LS(LC(T))  &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &none
-&kp LSHFT    &hm LGUI LC(Z) &hm LALT LC(A) &hm LCTRL LC(C) &hm LSHFT LC(V) &kp LC(Y) &kp HOME     &kp LEFT       &kp DOWN       &kp RIGHT     &kp END        &kp RSHFT
+&hm LSHFT LS(LC(C)) &hm LGUI LC(Z) &hm LALT LC(A) &hm LCTRL LC(C) &hm LSHFT LC(V) &kp LC(Y) &kp HOME     &kp LEFT       &kp DOWN       &kp RIGHT     &kp END        &kp RSHFT
 &kp LS(LC(J)) &kp LC(W)     &kp LC(O)     &kp LC(N)      &kp LS(LC(V))  &kp LC(T)      &none        &kp INT5       &kp CAPS       &kp INT4      &none          &none
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
@@ -115,7 +115,7 @@
         system_layer {
             bindings = <
 &none        &kp K_APP     &kp SLCK      &kp C_BRI_DN   &kp C_BRI_UP   &none          &kp F6       &kp F7         &kp F8         &kp F9        &kp F10        &none
-&kp LSHFT    &kp ESC       &kp C_MUTE    &kp C_VOL_DN   &kp C_VOL_UP   &kp PSCRN      &kp F1       &hm RSHFT F2   &hm RCTRL F3   &hm RALT F4   &hm RGUI F5    &kp RSHFT
+&kp LSHFT &kp ESC       &kp C_MUTE    &kp C_VOL_DN   &kp C_VOL_UP   &kp PSCRN      &kp F1       &hm RSHFT F2   &hm RCTRL F3   &hm RALT F4   &hm RGUI F5    &kp RSHFT
 &none        &kp PAUSE_BREAK &kp C_PREV  &kp C_PP       &kp C_NEXT     &none          &kp F11      &kp F12        &none          &none         &none          &none
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
@@ -124,7 +124,7 @@
         tab_shortcut_layer {
             bindings = <
 &kp LS(LC(I)) &kp LS(LC(W)) &kp LC(S)     &kp LC(X)      &kp LC(F)      &kp LS(LC(T))  &none        &none          &none          &none         &none          &none
-&kp LS(LC(C)) &kp LC(Z)     &kp LC(A)     &kp LC(C)      &kp LC(V)      &kp LC(Y)      &none        &hm RSHFT N1   &hm RCTRL N2   &hm RALT N3   &hm RGUI N4    &none
+&kp LS(LC(C)) &kp LC(Z)     &kp LC(A)     &kp LC(C)      &kp LC(V)      &kp LC(Y)      &none        &hm RSHFT N1   &hm RCTRL N2   &hm RALT N3   &hm RGUI N4    &kp RSHFT
 &kp LS(LC(J)) &kp LC(W)     &kp LC(O)     &kp LC(N)      &kp LS(LC(V))  &kp LC(T)      &none        &none          &none          &none         &none          &none
 &none        &none         &none         &trans         &trans         &trans         &trans       &none          &none          &none
             >;
