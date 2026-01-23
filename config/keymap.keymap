@@ -89,7 +89,7 @@
 
         sym_arr_layer {
             bindings = <
-&kp JIS_PIPE &kp AMPS      &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_SEMI   &kp JIS_COLON  &kp DEL      &kp PG_DN      &kp UP         &kp PG_UP     &kp INS        &none
+&kp JIS_PIPE &kp AMPS      &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_SEMI   &kp JIS_COLON  &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &none
 &hm LSHFT DLLR &hm LGUI JIS_EQL &hm LALT LPAR &hm LCTRL RPAR &hm LSHFT QMARK &kp EXCL     &kp HOME     &hm RSHFT LEFT &hm RCTRL DOWN &hm RALT RIGHT &hm RGUI END   &hm RSHFT N0
 &kp JIS_TILDE &kp JIS_UNDR  &kp JIS_LBRC  &kp JIS_RBRC   &kp JIS_QUOT   &kp JIS_DQUOT  &none        &kp INT5       &kp CAPS       &kp INT4      &none          &none
 &none        &none         &none         &kp TAB        &trans         &trans         &trans       &none          &none          &none
@@ -98,7 +98,7 @@
 
         shortcut_arr_layer {
             bindings = <
-&kp LS(LC(I)) &kp LS(LC(W)) &kp LC(S)     &kp LC(X)      &kp LC(F)      &kp LS(LC(T))  &kp DEL      &kp PG_DN      &kp UP         &kp PG_UP     &kp INS        &none
+&kp LS(LC(I)) &kp LS(LC(W)) &kp LC(S)     &kp LC(X)      &kp LC(F)      &kp LS(LC(T))  &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &none
 &hm LSHFT LS(LC(C)) &hm LGUI LC(Z) &hm LALT LC(A) &hm LCTRL LC(C) &hm LSHFT LC(V) &kp LC(Y) &kp HOME     &hm RSHFT LEFT &hm RCTRL DOWN &hm RALT RIGHT &hm RGUI END   &hm RSHFT N0
 &kp LS(LC(J)) &kp LC(W)     &kp LC(O)     &kp LC(N)      &kp LS(LC(V))  &kp LC(T)      &none        &kp INT5       &kp CAPS       &kp INT4      &none          &none
 &none        &none         &none         &kp TAB        &trans         &trans         &trans       &none          &none          &none
