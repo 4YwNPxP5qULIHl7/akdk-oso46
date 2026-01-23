@@ -41,14 +41,30 @@
 
 / {
     behaviors {
-        hm: homerow_mods {
+        // 左手用Homerow Mods: 右側のキー位置が押された時のみホールド判定
+        hml: homerow_mods_left {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <400>;
+            tapping-term-ms = <280>;
             quick-tap-ms = <175>;
             require-prior-idle-ms = <150>;
-            flavor = "balanced";
+            flavor = "tap-preferred";
             bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 39 40 41 42 43>;
+            hold-trigger-on-release;
+        };
+
+        // 右手用Homerow Mods: 左側のキー位置が押された時のみホールド判定
+        hmr: homerow_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38>;
+            hold-trigger-on-release;
         };
     };
 
@@ -71,7 +87,7 @@
         default_layer {
             bindings = <
 &none        &kp Q         &kp C         &kp L          &kp COMMA      &kp DOT        &kp F        &kp W          &kp R          &kp Y         &kp P          &kp V
-&kp LSHFT    &hm LGUI E    &hm LALT I    &hm LCTRL O    &hm LSHFT A    &kp U          &kp K        &hm RSHFT T    &hm RCTRL N    &hm RALT S    &hm RGUI H     &hm RSHFT Z
+&kp LSHFT    &hml LGUI E   &hml LALT I   &hml LCTRL O   &hml LSHFT A   &kp U          &kp K        &hmr RSHFT T   &hmr RCTRL N   &hmr RALT S   &hmr RGUI H    &hmr RSHFT Z
 &none        &kp X         &kp JIS_COLON &kp JIS_SEMI   &kp MINUS      &kp SLASH      &kp G        &kp D          &kp M          &kp J         &kp B          &kp JIS_QUOT
 &none        &none         &none         &lt L_TAB TAB  &lt L_NUM SPACE &lt L_SYM BSPC &lt L_SHT RET &none         &none          &none
             >;
@@ -80,7 +96,7 @@
         qwerty_layer {
             bindings = <
 &none        &kp Q         &kp W         &kp E          &kp R          &kp T          &kp Y        &kp U          &kp I          &kp O         &kp P          &kp MINUS
-&kp LSHFT    &hm LGUI A    &hm LALT S    &hm LCTRL D    &hm LSHFT F    &kp G          &kp H        &hm RSHFT J    &hm RCTRL K    &hm RALT L    &hm RGUI JIS_SEMI &hm RSHFT JIS_COLON
+&kp LSHFT    &hml LGUI A   &hml LALT S   &hml LCTRL D   &hml LSHFT F   &kp G          &kp H        &hmr RSHFT J   &hmr RCTRL K   &hmr RALT L   &hmr RGUI JIS_SEMI &hmr RSHFT JIS_COLON
 &none        &kp Z         &kp X         &kp C          &kp V          &kp B          &kp N        &kp M          &kp COMMA      &kp DOT       &kp SLASH      &kp JIS_QUOT
 &none        &none         &none         &lt L_TAB TAB  &lt L_NUM SPACE &lt L_SYM BSPC &lt L_SHT RET &none         &none          &none
             >;
@@ -89,7 +105,7 @@
         num_sym_layer {
             bindings = <
 &kp JIS_CARET &kp JIS_DLLR  &kp JIS_LT    &kp JIS_GT     &kp JIS_PLUS   &kp JIS_ASTRK  &kp N6       &kp N7         &kp N8         &kp N9        &kp N0         &kp JIS_TILDE
-&hm LSHFT HASH &hm LGUI JIS_EQL &hm LALT COMMA &hm LCTRL DOT &hm LSHFT MINUS &kp SLASH &kp N1 &hm RSHFT N2   &hm RCTRL N3   &hm RALT N4   &hm RGUI N5    &hm RSHFT JIS_UNDR
+&hml LSHFT HASH &hml LGUI JIS_EQL &hml LALT COMMA &hml LCTRL DOT &hml LSHFT MINUS &kp SLASH &kp N1 &hmr RSHFT N2  &hmr RCTRL N3  &hmr RALT N4  &hmr RGUI N5   &hmr RSHFT JIS_UNDR
 &kp JIS_AT    &kp JIS_BSLH  &kp JIS_PIPE  &kp JIS_AMPS   &kp JIS_PRCNT  &kp JIS_GRV    &kp JIS_EXCL &kp JIS_QMARK  &kp JIS_QUOT   &kp JIS_DQUOT &kp JIS_SEMI   &kp JIS_COLON
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
@@ -98,7 +114,7 @@
         sym_arr_layer {
             bindings = <
 &kp JIS_PIPE &kp JIS_AMPS  &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_SEMI   &kp JIS_COLON  &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &none
-&hm LSHFT JIS_DLLR &hm LGUI JIS_EQL &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &hm LSHFT JIS_QMARK &kp JIS_EXCL &kp HOME &kp LEFT &kp DOWN &kp RIGHT &kp END        &kp RSHFT
+&hml LSHFT JIS_DLLR &hml LGUI JIS_EQL &hml LALT JIS_LPAR &hml LCTRL JIS_RPAR &hml LSHFT JIS_QMARK &kp JIS_EXCL &kp HOME &kp LEFT &kp DOWN &kp RIGHT &kp END        &kp RSHFT
 &kp JIS_TILDE &kp JIS_UNDR  &kp JIS_LBRC  &kp JIS_RBRC   &kp JIS_QUOT   &kp JIS_DQUOT  &none        &kp INT5       &kp CAPS       &kp INT4      &none          &none
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
@@ -107,7 +123,7 @@
         shortcut_layer {
             bindings = <
 &kp LS(LC(I)) &kp LA(F4)    &kp LC(S)     &kp LC(X)      &kp LC(F)      &kp LS(LC(T))  &kp DEL      &kp PG_DN      &kp UP         &kp PG_UP     &kp INS        &none
-&hm LSHFT LS(LC(C)) &hm LGUI LC(Z) &hm LALT LC(A) &hm LCTRL LC(C) &hm LSHFT LC(V) &kp LC(Y) &kp HOME &kp LEFT      &kp DOWN       &kp RIGHT     &kp END        &kp RSHFT
+&hml LSHFT LS(LC(C)) &hml LGUI LC(Z) &hml LALT LC(A) &hml LCTRL LC(C) &hml LSHFT LC(V) &kp LC(Y) &kp HOME &kp LEFT      &kp DOWN       &kp RIGHT     &kp END        &kp RSHFT
 &kp LS(LC(J)) &kp LC(W)     &kp LC(O)     &kp LC(N)      &kp LS(LC(V))  &kp LC(T)      &none        &kp INT5       &kp CAPS       &kp INT4      &none          &none
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
@@ -116,7 +132,7 @@
         system_layer {
             bindings = <
 &none        &kp K_APP     &kp SLCK      &kp C_BRI_DN   &kp C_BRI_UP   &none          &kp F6       &kp F7         &kp F8         &kp F9        &kp F10        &none
-&kp LSHFT    &kp ESC       &kp C_MUTE    &kp C_VOL_DN   &kp C_VOL_UP   &kp PSCRN      &kp F1       &hm RSHFT F2   &hm RCTRL F3   &hm RALT F4   &hm RGUI F5    &kp RSHFT
+&kp LSHFT    &kp ESC       &kp C_MUTE    &kp C_VOL_DN   &kp C_VOL_UP   &kp PSCRN      &kp F1       &hmr RSHFT F2  &hmr RCTRL F3  &hmr RALT F4  &hmr RGUI F5   &kp RSHFT
 &none        &kp PAUSE_BREAK &kp C_PREV  &kp C_PP       &kp C_NEXT     &none          &kp F11      &kp F12        &none          &none         &none          &none
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
