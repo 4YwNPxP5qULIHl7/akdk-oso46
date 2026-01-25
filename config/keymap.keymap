@@ -122,7 +122,7 @@
 
         shortcut_layer {
             bindings = <
-&kp LS(LC(I)) &kp LA(F4)    &kp LC(S)     &kp LC(X)      &kp LC(F)      &kp LS(LC(T))  &kp DEL      &kp PG_DN      &kp UP         &kp PG_UP     &kp INS        &none
+&kp LS(LC(I)) &kp LA(F4)    &kp LC(S)     &kp LC(X)      &kp LC(F)      &kp LS(LC(T))  &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &none
 &hml LSHFT LS(LC(C)) &hml LGUI LC(Z) &hml LALT LC(A) &hml LCTRL LC(C) &hml LSHFT LC(V) &kp LC(Y) &kp HOME &kp LEFT      &kp DOWN       &kp RIGHT     &kp END        &kp RSHFT
 &kp LS(LC(J)) &kp LC(W)     &kp LC(O)     &kp LC(N)      &kp LS(LC(V))  &kp LC(T)      &none        &kp INT5       &kp CAPS       &kp INT4      &none          &none
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
