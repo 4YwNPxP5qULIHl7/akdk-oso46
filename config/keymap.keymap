@@ -53,8 +53,8 @@
 
     combos {
         compatible = "zmk,combos";
-        combo_lang2 { timeout-ms = <30>; key-positions = <2 3>; bindings = <&kp LANG2>; };
-        combo_lang1 { timeout-ms = <30>; key-positions = <8 9>; bindings = <&kp LANG1>; };
+        combo_lang2 { timeout-ms = <40>; key-positions = <2 3>; bindings = <&kp LANG2>; };
+        combo_lang1 { timeout-ms = <40>; key-positions = <8 9>; bindings = <&kp LANG1>; };
         combo_to_qwerty { timeout-ms = <50>; key-positions = <2 3 13 16>; bindings = <&to L_QWE>; };
         combo_to_def { timeout-ms = <50>; key-positions = <8 9 19 22>; bindings = <&to L_DEF>; };
     };
@@ -70,8 +70,8 @@
         default_layer {
             bindings = <
 &kp LALT     &kp Q         &kp C         &kp L          &kp COMMA      &kp DOT        &kp F        &kp W          &kp R          &kp Y         &kp P          &kp V
-&kp LSHFT    &hm LGUI E    &hm LALT I    &hm LCTRL O    &hm LSHFT A    &kp U          &kp K        &hm RSHFT T    &hm RCTRL N    &hm RALT S    &hm RGUI H     &hm RSHFT Z
-&kp LCTRL    &kp X         &kp JIS_COLON &kp JIS_SEMI   &kp MINUS      &kp SLASH      &kp G        &kp D          &kp M          &kp J         &kp B          &kp JIS_BSLH
+&kp LSHFT    &hm LGUI E    &hm LALT I    &hm LCTRL O    &hm LSHFT A    &kp U          &kp K        &hm RSHFT T    &hm RCTRL N    &hm RALT S    &hm RGUI H     &hm RSHFT JIS_BSLH
+&kp LCTRL    &kp X         &kp JIS_COLON &kp JIS_SEMI   &kp MINUS      &kp SLASH      &kp G        &kp D          &kp M          &kp J         &kp B          &kp Z
 &none        &none         &none         &lt L_TAB TAB  &lt L_NUM SPACE &lt L_SYM BSPC &lt L_SHT RET &none         &none          &none
             >;
         };
