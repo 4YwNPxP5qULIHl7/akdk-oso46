@@ -44,8 +44,8 @@
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <300>;
-            quick-tap-ms = <0>; // 連打リピート無効
+            tapping-term-ms = <400>;
+            quick-tap-ms = <0>; 
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
@@ -53,10 +53,10 @@
 
     combos {
         compatible = "zmk,combos";
-        combo_lang2 { timeout-ms = <40>; key-positions = <2 3>; bindings = <&kp LANG2>; };
-        combo_lang1 { timeout-ms = <40>; key-positions = <8 9>; bindings = <&kp LANG1>; };
-        combo_to_qwerty { timeout-ms = <50>; key-positions = <2 3 13 16>; bindings = <&to L_QWE>; };
-        combo_to_def { timeout-ms = <50>; key-positions = <8 9 19 22>; bindings = <&to L_DEF>; };
+        combo_lang2 { timeout-ms = <30>; key-positions = <2 3>; bindings = <&kp LANG2>; };
+        combo_lang1 { timeout-ms = <30>; key-positions = <8 9>; bindings = <&kp LANG1>; };
+        combo_to_qwerty { timeout-ms = <60>; key-positions = <1 2 3 4>; bindings = <&to L_QWE>; };
+        combo_to_def { timeout-ms = <60>; key-positions = <7 8 9 10>; bindings = <&to L_DEF>; };
     };
 
     conditional_layers {
@@ -87,18 +87,18 @@
 
         num_sym_layer {
             bindings = <
-&kp LALT     &kp JIS_EQL   &kp JIS_LT    &kp JIS_GT     &kp JIS_CARET  &kp JIS_GRV    &kp JIS_PLUS &kp N7         &kp N8         &kp N9        &kp JIS_ASTRK  &kp RALT
-&kp LSHFT    &hm LGUI JIS_TILDE &hm LALT COMMA &hm LCTRL DOT &hm LSHFT JIS_PRCNT &kp JIS_DLLR &kp JIS_EQL &hm RSHFT N4 &hm RCTRL N5 &hm RALT N6 &hm RGUI N0 &kp RSHFT
-&kp LCTRL    &kp JIS_UNDR  &kp JIS_SEMI  &kp JIS_COLON  &kp HASH       &kp JIS_AT     &kp MINUS    &kp N1         &kp N2         &kp N3        &kp SLASH      &kp RCTRL
+&kp LALT     &kp JIS_PLUS  &kp JIS_LT    &kp JIS_GT     &kp JIS_DLLR   &kp JIS_BSLH   &kp JIS_PLUS &kp N7         &kp N8         &kp N9        &kp JIS_ASTRK  &kp RALT
+&kp LSHFT    &hm LGUI JIS_PRCNT &hm LALT JIS_LBRC &hm LCTRL JIS_RBRC &hm LSHFT DOT &kp COMMA &kp JIS_EQL &hm RSHFT N4 &hm RCTRL N5 &hm RALT N6 &hm RGUI N0 &kp RSHFT
+&kp LCTRL    &kp JIS_ASTRK &kp HASH      &kp JIS_AT     &kp JIS_COLON  &kp JIS_SEMI   &kp MINUS    &kp N1         &kp N2         &kp N3        &kp SLASH      &kp RCTRL
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
         };
 
         sym_arr_layer {
             bindings = <
-&kp LALT     &kp JIS_EQL   &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_AMPS   &kp JIS_PIPE   &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &kp RALT
+&kp LALT     &kp JIS_UNDR  &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_AMPS   &kp JIS_PIPE   &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &kp RALT
 &kp LSHFT    &hm LGUI JIS_TILDE &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &hm LSHFT JIS_QMARK &kp JIS_EXCL &kp HOME &kp LEFT &kp DOWN &kp RIGHT &kp END &kp RSHFT
-&kp LCTRL    &kp JIS_UNDR  &hm LGUI JIS_LBRC &hm LALT JIS_RBRC &kp JIS_QUOT &kp JIS_DQUOT &none    &none          &none          &none         &none          &kp RCTRL
+&kp LCTRL    &kp JIS_EQL   &kp JIS_CARET &kp JIS_GRV    &kp JIS_DQUOT  &kp JIS_QUOT   &none        &none          &none          &none         &none          &kp RCTRL
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
         };
