@@ -1,4 +1,57 @@
-combos {
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+
+// レイヤー定義
+#define L_DEF 0
+#define L_QWE 1
+#define L_NUM 2
+#define L_SYM 3
+#define L_SHT 4
+#define L_SYS 5
+#define L_TAB 4 
+
+// --- JIS配列環境用定義 ---
+#define JIS_CARET EQUAL
+#define JIS_AMPS  LS(N6)
+#define JIS_ASTRK LS(SQT)
+#define JIS_LPAR  LS(N8)
+#define JIS_RPAR  LS(N9)
+#define JIS_EQL   LS(MINUS)
+#define JIS_PLUS  LS(SEMI)
+#define JIS_LT    LS(COMMA)
+#define JIS_GT    LS(DOT)
+#define JIS_QMARK LS(SLASH)
+#define JIS_UNDR  LS(INT1)
+#define JIS_PIPE  LS(INT3)
+#define JIS_BSLH  INT3
+#define JIS_AT    LBKT
+#define JIS_LBKT  RBKT
+#define JIS_RBKT  NON_US_HASH
+#define JIS_LBRC  LS(RBKT)
+#define JIS_RBRC  LS(NON_US_HASH)
+#define JIS_COLON SQT
+#define JIS_SEMI  SEMI
+#define JIS_QUOT  LS(N7)
+#define JIS_DQUOT LS(N2)
+#define JIS_GRV   LS(LBKT)
+#define JIS_TILDE LS(EQUAL)
+#define JIS_DLLR  LS(N4)
+#define JIS_PRCNT LS(N5)
+#define JIS_EXCL  LS(N1)
+
+/ {
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <400>;
+            quick-tap-ms = <0>; 
+            flavor = "balanced";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
+    combos {
         compatible = "zmk,combos";
         
         // 日本語入力（かな）: デフォルトとQwertyレイヤーのみ有効
@@ -33,3 +86,67 @@ combos {
             layers = <L_QWE>; 
         };
     };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer { if-layers = <L_NUM L_SYM>; then-layer = <L_SYS>; };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&kp LALT     &kp Q         &kp C         &kp L          &kp COMMA      &kp DOT        &kp F        &kp W          &kp R          &kp Y         &kp P          &kp V
+&kp LSHFT    &hm LGUI E    &hm LALT I    &hm LCTRL O    &hm LSHFT A    &kp U          &kp K        &hm RSHFT T    &hm RCTRL N    &hm RALT S    &hm RGUI H     &hm RSHFT JIS_BSLH
+&kp LCTRL    &kp X         &kp JIS_COLON &kp JIS_SEMI   &kp MINUS      &kp SLASH      &kp G        &kp D          &kp M          &kp J         &kp B          &kp Z
+&none        &none         &none         &lt L_TAB TAB  &lt L_NUM SPACE &lt L_SYM BSPC &lt L_SHT RET &none         &none          &none
+            >;
+        };
+
+        qwerty_layer {
+            bindings = <
+&kp LALT     &kp Q         &kp W         &kp E          &kp R          &kp T          &kp Y        &kp U          &kp I          &kp O         &kp P          &kp MINUS
+&kp LSHFT    &hm LGUI A    &hm LALT S    &hm LCTRL D    &hm LSHFT F    &kp G          &kp H        &hm RSHFT J    &hm RCTRL K    &hm RALT L    &hm RGUI JIS_SEMI &hm RSHFT JIS_COLON
+&kp LCTRL    &kp Z         &kp X         &kp C          &kp V          &kp B          &kp N        &kp M          &kp COMMA      &kp DOT       &kp SLASH      &kp JIS_BSLH
+&none        &none         &none         &lt L_TAB TAB  &lt L_NUM SPACE &lt L_SYM BSPC &lt L_SHT RET &none         &none          &none
+            >;
+        };
+
+        num_sym_layer {
+            bindings = <
+&kp LALT     &kp JIS_PLUS  &kp JIS_LT    &kp JIS_GT     &kp JIS_DLLR   &kp JIS_BSLH   &kp JIS_PLUS &kp N7         &kp N8         &kp N9        &kp JIS_ASTRK  &kp RALT
+&kp LSHFT    &hm LGUI JIS_PRCNT &hm LALT JIS_LBRC &hm LCTRL JIS_RBRC &hm LSHFT DOT &kp COMMA &kp JIS_EQL &hm RSHFT N4 &hm RCTRL N5 &hm RALT N6 &hm RGUI N0 &kp RSHFT
+&kp LCTRL    &kp JIS_ASTRK &kp HASH      &kp JIS_AT     &kp JIS_COLON  &kp JIS_SEMI   &kp MINUS    &kp N1         &kp N2         &kp N3        &kp SLASH      &kp RCTRL
+&none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
+            >;
+        };
+
+        sym_arr_layer {
+            bindings = <
+&kp LALT     &kp JIS_UNDR  &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_AMPS   &kp JIS_PIPE   &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &kp RALT
+&kp LSHFT    &hm LGUI JIS_TILDE &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &hm LSHFT JIS_QMARK &kp JIS_EXCL &kp HOME &kp LEFT &kp DOWN &kp RIGHT &kp END &kp RSHFT
+&kp LCTRL    &kp JIS_EQL   &kp JIS_CARET &kp JIS_GRV    &kp JIS_DQUOT  &kp JIS_QUOT   &none        &none          &none          &none         &none          &kp RCTRL
+&none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
+            >;
+        };
+
+        shortcut_layer {
+            bindings = <
+&kp LALT     &none         &kp LC(Z)     &kp LC(Y)      &none          &none          &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &kp RALT
+&kp LSHFT    &hm LGUI LC(A) &hm LALT LC(X) &hm LCTRL LC(C) &hm LSHFT LC(V) &none       &kp HOME     &kp LEFT       &kp DOWN       &kp RIGHT     &kp END        &kp RSHFT
+&kp LCTRL    &none         &none         &none          &none          &none          &none        &none          &none          &none         &none          &kp RCTRL
+&none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
+            >;
+        };
+
+        system_layer {
+            bindings = <
+&kp LALT     &none         &kp PSCRN     &kp C_BRI_DN   &kp C_BRI_UP   &none          &kp PAUSE_BREAK &kp F7      &kp F8         &kp F9        &kp F12        &kp RALT
+&kp LSHFT    &hm LGUI ESC  &hm LALT C_MUTE &hm LCTRL C_VOL_DN &hm LSHFT C_VOL_UP &none &kp K_APP   &hm RSHFT F4   &hm RCTRL F5   &hm RALT F6   &hm RGUI F11   &kp RSHFT
+&kp LCTRL    &none         &kp C_PREV    &kp C_PP       &kp C_NEXT     &none          &kp SLCK        &kp F1      &kp F2         &kp F3        &kp F10        &kp RCTRL
+&none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
+            >;
+        };
+    };
+};
