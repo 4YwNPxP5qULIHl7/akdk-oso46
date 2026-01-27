@@ -54,37 +54,13 @@
     combos {
         compatible = "zmk,combos";
         
-        // 日本語入力（かな）: デフォルトとQwertyレイヤーのみ有効
-        combo_lang1 { 
-            timeout-ms = <30>; 
-            key-positions = <8 9>; 
-            bindings = <&kp LANG1>; 
-            layers = <L_DEF L_QWE>; 
-        };
-
-        // 日本語入力（英数）: デフォルトとQwertyレイヤーのみ有効
-        combo_lang2 { 
-            timeout-ms = <30>; 
-            key-positions = <2 3>; 
-            bindings = <&kp LANG2>; 
-            layers = <L_DEF L_QWE>; 
-        };
-
-        // Qwertyへ切り替え: デフォルトレイヤーにいる時のみ発動
-        combo_to_qwerty { 
-            timeout-ms = <60>; 
-            key-positions = <1 2 3 4>; 
-            bindings = <&to L_QWE>; 
-            layers = <L_DEF>; 
-        };
-
-        // デフォルトへ切り替え: Qwertyレイヤーにいる時のみ発動
-        combo_to_def { 
-            timeout-ms = <60>; 
-            key-positions = <7 8 9 10>; 
-            bindings = <&to L_DEF>; 
-            layers = <L_QWE>; 
-        };
+        // 言語切り替えコンボ（L_DEF, L_QWEのみ）
+        combo_lang2 { timeout-ms = <30>; key-positions = <2 3>; bindings = <&kp LANG2>; layers = <L_DEF L_QWE>; };
+        combo_lang1 { timeout-ms = <30>; key-positions = <8 9>; bindings = <&kp LANG1>; layers = <L_DEF L_QWE>; };
+        
+        // レイヤー相互切り替えコンボ
+        combo_to_qwerty { timeout-ms = <60>; key-positions = <1 2 3 4>; bindings = <&to L_QWE>; layers = <L_DEF>; };
+        combo_to_def { timeout-ms = <60>; key-positions = <7 8 9 10>; bindings = <&to L_DEF>; layers = <L_QWE>; };
     };
 
     conditional_layers {
@@ -115,9 +91,9 @@
 
         num_sym_layer {
             bindings = <
-&kp LALT     &kp JIS_PLUS  &kp JIS_LT    &kp JIS_GT     &kp JIS_DLLR   &kp JIS_BSLH   &kp JIS_PLUS &kp N7         &kp N8         &kp N9        &kp JIS_ASTRK  &kp RALT
+&kp LALT     &kp JIS_DLLR  &kp JIS_LT    &kp JIS_GT     &kp JIS_ASTRK  &kp JIS_PLUS   &kp JIS_PLUS &kp N7         &kp N8         &kp N9        &kp JIS_ASTRK  &kp RALT
 &kp LSHFT    &hm LGUI JIS_PRCNT &hm LALT JIS_LBRC &hm LCTRL JIS_RBRC &hm LSHFT DOT &kp COMMA &kp JIS_EQL &hm RSHFT N4 &hm RCTRL N5 &hm RALT N6 &hm RGUI N0 &kp RSHFT
-&kp LCTRL    &kp JIS_ASTRK &kp HASH      &kp JIS_AT     &kp JIS_COLON  &kp JIS_SEMI   &kp MINUS    &kp N1         &kp N2         &kp N3        &kp SLASH      &kp RCTRL
+&kp LCTRL    &kp JIS_BSLH  &kp HASH      &kp JIS_AT     &kp JIS_COLON  &kp JIS_SEMI   &kp MINUS    &kp N1         &kp N2         &kp N3        &kp SLASH      &kp RCTRL
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
         };
