@@ -100,18 +100,18 @@
 
         sym_arr_layer {
             bindings = <
-&kp LALT     &kp JIS_UNDR  &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_AMPS   &kp JIS_PIPE   &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &kp RALT
-&kp LSHFT    &hm LGUI JIS_TILDE &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &hm LSHFT JIS_QMARK &kp JIS_EXCL &kp HOME &kp LEFT &kp DOWN &kp RIGHT &kp END &kp RSHFT
-&kp LCTRL    &kp JIS_EQL   &kp JIS_CARET &kp JIS_GRV    &kp JIS_DQUOT  &kp JIS_QUOT   &none        &none          &none          &none         &none          &kp RCTRL
+&kp LALT     &kp JIS_UNDR  &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_AMPS   &kp JIS_PIPE   &kp HOME     &kp PG_UP      &kp UP         &kp PG_DN     &kp END        &kp RALT
+&kp LSHFT    &hm LGUI JIS_TILDE &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &hm LSHFT JIS_QMARK &kp JIS_EXCL &kp DEL &kp LEFT &kp DOWN &kp RIGHT &kp BSPC &kp RSHFT
+&kp LCTRL    &kp JIS_EQL   &kp JIS_CARET &kp JIS_GRV    &kp JIS_DQUOT  &kp JIS_QUOT   &none        &none          &none          &none         &kp INS        &kp RCTRL
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
         };
 
         shortcut_layer {
             bindings = <
-&kp LALT     &none         &kp LC(Z)     &kp LC(Y)      &none          &none          &kp DEL      &kp PG_UP      &kp UP         &kp PG_DN     &kp INS        &kp RALT
-&kp LSHFT    &hm LGUI LC(A) &hm LALT LC(X) &hm LCTRL LC(C) &hm LSHFT LC(V) &none       &kp HOME     &kp LEFT       &kp DOWN       &kp RIGHT     &kp END        &kp RSHFT
-&kp LCTRL    &none         &none         &none          &none          &none          &none        &none          &none          &none         &none          &kp RCTRL
+&kp LALT     &none         &kp LC(Z)     &kp LC(Y)      &none          &none          &kp HOME     &kp PG_UP      &kp UP         &kp PG_DN     &kp END        &kp RALT
+&kp LSHFT    &kp LC(A)     &kp LC(X)     &kp LC(C)      &kp LC(V)      &none          &kp DEL      &kp LEFT       &kp DOWN       &kp RIGHT     &kp BSPC       &kp RSHFT
+&kp LCTRL    &none         &none         &none          &none          &none          &none        &none          &none          &none         &kp INS        &kp RCTRL
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
         };
