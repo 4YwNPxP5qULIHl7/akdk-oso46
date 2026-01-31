@@ -54,11 +54,11 @@
     combos {
         compatible = "zmk,combos";
         
-        // 言語切り替えコンボ（L_DEF, L_QWEのみ）
+        // 言語切り替えコンボ（L_DEF, L_QWEのみ有効）
         combo_lang2 { timeout-ms = <30>; key-positions = <2 3>; bindings = <&kp LANG2>; layers = <L_DEF L_QWE>; };
         combo_lang1 { timeout-ms = <30>; key-positions = <8 9>; bindings = <&kp LANG1>; layers = <L_DEF L_QWE>; };
         
-        // レイヤー相互切り替えコンボ
+        // レイヤー相互切り替えコンボ（誤爆防止のため現在のレイヤーを指定）
         combo_to_qwerty { timeout-ms = <60>; key-positions = <1 2 3 4>; bindings = <&to L_QWE>; layers = <L_DEF>; };
         combo_to_def { timeout-ms = <60>; key-positions = <7 8 9 10>; bindings = <&to L_DEF>; layers = <L_QWE>; };
     };
@@ -110,7 +110,7 @@
         shortcut_layer {
             bindings = <
 &kp LALT     &none         &kp LC(Z)     &kp LC(Y)      &none          &none          &kp HOME     &kp PG_UP      &kp UP         &kp PG_DN     &kp END        &kp RALT
-&kp LSHFT    &hm LGUI LC(A)     &hm LALT LC(X)     &hm LCTRL LC(C)      &hm LSHIFT LC(V)      &none          &kp DEL      &kp LEFT       &kp DOWN       &kp RIGHT     &kp BSPC       &kp RSHFT
+&kp LSHFT    &hm LGUI LC(A) &hm LALT LC(X) &hm LCTRL LC(C) &hm LSHFT LC(V) &none       &kp DEL      &kp LEFT       &kp DOWN       &kp RIGHT     &kp BSPC       &kp RSHFT
 &kp LCTRL    &none         &none         &none          &none          &none          &none        &none          &none          &none         &kp INS        &kp RCTRL
 &none        &none         &none         &lt L_TAB TAB  &trans         &trans         &trans       &none          &none          &none
             >;
