@@ -44,10 +44,12 @@
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
-            tapping-term-ms = <400>;
-            quick-tap-ms = <0>; 
-            flavor = "balanced";
+            tapping-term-ms = <280>; // 400msは長すぎて逆にホールド判定が残りやすいため少し短縮
+            quick-tap-ms = <175>;
+            flavor = "tap-preferred"; // タップを優先する挙動に変更
             bindings = <&kp>, <&kp>;
+            // 前の入力から125ms空かない限り、ホールド（GUI等）を発動させない設定
+            require-prior-idle-ms = <125>; 
         };
     };
 
