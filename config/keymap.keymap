@@ -118,8 +118,8 @@
 
         system_layer {
             bindings = <
-&kp LALT     &none         &kp PSCRN     &kp C_BRI_DN   &kp C_BRI_UP   &none          &kp PAUSE_BREAK &kp F7      &kp F8         &kp F9        &kp F12        &kp RALT
-&kp LSHFT    &hm LGUI ESC  &hm LALT C_MUTE &hm LCTRL C_VOL_DN &hm LSHFT C_VOL_UP &kp K_APP &kp CAPS &hm RSHFT F4 &hm RCTRL F5 &hm RALT F6 &hm RGUI F11 &kp RSHFT
+&kp LALT     &none         &kp C_BRI_DN   &kp C_BRI_UP   &kp K_APP    &none          &kp PAUSE_BREAK &kp F7      &kp F8         &kp F9        &kp F12        &kp RALT
+&kp LSHFT    &hm LGUI C_MUTE  &hm LALT C_VOL_DN &hm LCTRL C_VOL_UP &hm LSHFT ESC    &kp PSCRN &kp CAPS &hm RSHFT F4 &hm RCTRL F5 &hm RALT F6 &hm RGUI F11 &kp RSHFT
 &kp LCTRL    &none         &none         &none          &none          &none          &kp SLCK        &kp F1      &kp F2         &kp F3        &kp F10        &kp RCTRL
 &none        &none         &none         &lt L_SHT TAB  &trans         &trans         &trans       &none          &none          &none
             >;
