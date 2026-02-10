@@ -76,7 +76,7 @@
         default_layer {
             bindings = <
 &kp LALT     &kp Q         &kp C         &kp L          &kp COMMA      &kp DOT        &kp F        &kp W          &kp H          &kp Y         &kp P          &kp V
-&kp LSHFT    &hm LGUI E    &hm LALT I    &hm LCTRL O    &hm LSHFT A    &kp U          &kp K        &hm RSHFT T    &hm RCTRL N    &hm RALT S    &hm RGUI R     &hm RSHFT J
+&hm LSHIFT Q    &hm LGUI E    &hm LALT I    &hm LCTRL O    &hm LSHFT A    &kp U          &kp K        &hm RSHFT T    &hm RCTRL N    &hm RALT S    &hm RGUI R     &hm RSHFT J
 &kp LCTRL    &kp X         &kp JIS_COLON &kp JIS_SEMI   &kp MINUS      &kp SLASH      &kp G        &kp D          &kp M          &kp Z         &kp B          &kp JIS_BSLH
 &none        &none         &none         &lt L_TAB TAB  &lt L_NUM SPACE &lt L_SYM BSPC &lt L_SHT RET &none         &none          &none
             >;
@@ -85,7 +85,7 @@
         qwerty_layer {
             bindings = <
 &kp LALT     &kp Q         &kp W         &kp E          &kp R          &kp T          &kp Y        &kp U          &kp I          &kp O         &kp P          &kp RALT
-&kp LSHFT    &hm LGUI A    &hm LALT S    &hm LCTRL D    &hm LSHFT F    &kp G          &kp H        &hm RSHFT J    &hm RCTRL K    &hm RALT L    &kp MINUS      &kp RSHFT
+&hm LSHIFT Q    &hm LGUI A    &hm LALT S    &hm LCTRL D    &hm LSHFT F    &kp G          &kp H        &hm RSHFT J    &hm RCTRL K    &hm RALT L    &kp MINUS      &kp RSHFT
 &kp LCTRL    &kp Z         &kp X         &kp C          &kp V          &kp B          &kp N        &kp M          &kp COMMA      &kp DOT       &kp SLASH      &kp RCTRL
 &none        &none         &none         &lt L_TAB TAB  &lt L_NUM SPACE &lt L_SYM BSPC &lt L_SHT RET &none         &none          &none
             >;
