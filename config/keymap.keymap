@@ -102,7 +102,7 @@
             bindings = <
 &kp LALT     &kp JIS_UNDR  &kp JIS_LBKT  &kp JIS_RBKT   &kp JIS_AMPS   &kp JIS_PIPE   &kp HOME     &kp PG_UP      &kp UP         &kp PG_DN     &kp END        &kp RALT
 &kp LSHFT    &hm LGUI JIS_TILDE &hm LALT JIS_LPAR &hm LCTRL JIS_RPAR &hm LSHFT JIS_QMARK &kp JIS_EXCL &kp DEL &kp LEFT &kp DOWN &kp RIGHT &kp BSPC &kp RSHFT
-&kp LCTRL    &kp JIS_EQL   &kp JIS_CARET &kp JIS_GRV    &kp JIS_DQUOT  &kp JIS_QUOT   &none        &kp C_PREV    &kp C_PP       &kp C_NEXT    &kp INS        &kp RCTRL
+&kp LCTRL    &kp JIS_EQL   &kp JIS_CARET &kp JIS_GRV    &kp JIS_DQUOT  &kp JIS_QUOT   &none        &kp C_PREV     &kp C_PP       &kp C_NEXT    &kp INS        &kp RCTRL
 &none        &none         &none         &lt L_SHT TAB  &trans         &trans         &trans       &none          &none          &none
             >;
         };
@@ -110,8 +110,8 @@
         shortcut_layer {
             bindings = <
 &kp LALT     &none         &kp LC(Z)     &kp LC(Y)      &none          &none          &kp HOME     &kp PG_UP      &kp UP         &kp PG_DN     &kp END        &kp RALT
-&kp LSHFT    &hm LGUI LC(A) &hm LALT LC(X) &hm LCTRL LC(C) &hm LSHFT LC(V) &none       &kp DEL &kp LEFT &kp DOWN &kp RIGHT &kp BSPC &kp RSHFT
-&kp LCTRL    &none         &none         &none          &none          &none          &none        &kp C_PREV    &kp C_PP       &kp C_NEXT    &kp INS        &kp RCTRL
+&kp LSHFT    &hm LGUI LC(A) &hm LALT LC(X) &hm LCTRL LC(C) &hm LSHFT LC(V) &none       &kp DEL      &kp LEFT       &kp DOWN       &kp RIGHT     &kp BSPC       &kp RSHFT
+&kp LCTRL    &none         &none         &none          &none          &none          &none        &kp C_PREV     &kp C_PP       &kp C_NEXT    &kp INS        &kp RCTRL
 &none        &none         &none         &lt L_SHT TAB  &trans         &trans         &trans       &none          &none          &none
             >;
         };
@@ -120,7 +120,7 @@
             bindings = <
 &kp LALT     &none         &kp PSCRN     &kp C_BRI_DN   &kp C_BRI_UP   &none          &kp PAUSE_BREAK &kp F7      &kp F8         &kp F9        &kp F12        &kp RALT
 &kp LSHFT    &hm LGUI ESC  &hm LALT C_MUTE &hm LCTRL C_VOL_DN &hm LSHFT C_VOL_UP &kp K_APP &kp CAPS &hm RSHFT F4 &hm RCTRL F5 &hm RALT F6 &hm RGUI F11 &kp RSHFT
-&kp LCTRL    &none              &none          &none          &none          &none          &kp SLCK        &kp F1      &kp F2         &kp F3        &kp F10        &kp RCTRL
+&kp LCTRL    &none         &none         &none          &none          &none          &kp SLCK        &kp F1      &kp F2         &kp F3        &kp F10        &kp RCTRL
 &none        &none         &none         &lt L_SHT TAB  &trans         &trans         &trans       &none          &none          &none
             >;
         };
