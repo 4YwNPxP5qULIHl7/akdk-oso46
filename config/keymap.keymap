@@ -110,8 +110,8 @@
         shortcut_layer {
             bindings = <
 &kp LALT     &none         &kp LC(Z)     &kp LC(Y)      &none          &none          &kp HOME     &kp PG_UP      &kp UP         &kp PG_DN     &kp END        &kp RALT
-&kp LSHFT    &hm LGUI LC(A) &hm LALT LC(X) &hm LCTRL LC(C) &hm LSHFT LC(V) &none       &kp DEL      &kp LEFT       &kp DOWN       &kp RIGHT     &kp BSPC       &kp RSHFT
-&kp LCTRL    &none         &none         &none          &none          &none          &none        &none          &none          &none         &kp INS        &kp RCTRL
+&kp LSHFT    &hm LGUI LC(A) &hm LALT LC(X) &hm LCTRL LC(C) &hm LSHFT LC(V) &none       &kp DEL &kp LEFT &kp DOWN &kp RIGHT &kp BSPC &kp RSHFT
+&kp LCTRL    &none         &none         &none          &none          &none          &none        &kp C_PREV    &kp C_PP       &kp C_NEXT    &kp INS        &kp RCTRL
 &none        &none         &none         &lt L_SHT TAB  &trans         &trans         &trans       &none          &none          &none
             >;
         };
