@@ -39,7 +39,6 @@
 #define JIS_PRCNT LS(N5)
 #define JIS_EXCL  LS(N1)
 #define JIS_HASH  LS(N3)
-#define JIS_NUM   LS(N3)
 
 / {
     behaviors {
@@ -57,11 +56,9 @@
     combos {
         compatible = "zmk,combos";
 
-        // 言語切り替えコンボ（中段）
         combo_lang2 { timeout-ms = <30>; key-positions = <14 15>; bindings = <&kp LANG2>; layers = <L_DEF L_QWE>; };
         combo_lang1 { timeout-ms = <30>; key-positions = <20 21>; bindings = <&kp LANG1>; layers = <L_DEF L_QWE>; };
 
-        // レイヤー相互切り替えコンボ
         combo_to_qwerty { timeout-ms = <60>; key-positions = <14 15 16>; bindings = <&to L_QWE>; layers = <L_DEF>; };
         combo_to_def    { timeout-ms = <60>; key-positions = <19 20 21>; bindings = <&to L_DEF>; layers = <L_QWE>; };
     };
@@ -74,13 +71,8 @@
     keymap {
         compatible = "zmk,keymap";
 
-        // デフォルトレイヤー
-        // ;  :  c  l  ,  .  f  w  h  y  p  v
-        // q  e  i  o  a  u  k  t  n  s  r  j
-        // @  x  [  ]  -  /  g  d  m  z  b  \
-        //       Esc Tab Sp Ent Bs
         default_layer {
-            bindings = 
+            bindings = <
 &kp JIS_SEMI  &kp JIS_COLON  &kp C          &kp L          &kp COMMA       &kp DOT         &kp F          &kp W          &kp H          &kp Y         &kp P          &kp V
 &hm LSHFT Q   &hm LGUI E     &hm LALT I     &hm LCTRL O    &hm LSHFT A     &kp U           &kp K          &hm RSHFT T    &hm RCTRL N    &hm RALT S    &hm RGUI R     &hm RSHFT J
 &kp JIS_AT    &kp X          &kp JIS_LBKT   &kp JIS_RBKT   &kp MINUS       &kp SLASH       &kp G          &kp D          &kp M          &kp Z         &kp B          &kp JIS_BSLH
@@ -88,27 +80,17 @@
             >;
         };
 
-        // QWERTYレイヤー
-        // [  ]  w  e  r  t  y  u  i  o  ;  :
-        // q  a  s  d  f  g  h  j  k  l  p  -
-        // @  z  x  c  v  b  n  m  ,  .  /  \
-        //       Esc Tab Sp Ent Bs
         qwerty_layer {
-            bindings = 
+            bindings = <
 &kp JIS_LBKT  &kp JIS_RBKT   &kp W          &kp E          &kp R           &kp T           &kp Y          &kp U          &kp I          &kp O         &kp JIS_SEMI   &kp JIS_COLON
-&hm LSHFT Q   &hm LGUI A     &hm LALT S     &hm LCTRL D    &hm LSHFT F     &kp G           &kp H          &hm RSHFT J    &hm RCTRL K    &hm RALT L    &hm RGUI P          &hm RSHFT MINUS
+&hm LSHFT Q   &hm LGUI A     &hm LALT S     &hm LCTRL D    &hm LSHFT F     &kp G           &kp H          &hm RSHFT J    &hm RCTRL K    &hm RALT L    &hm RGUI P     &hm RSHFT MINUS
 &kp JIS_AT    &kp Z          &kp X          &kp C          &kp V           &kp B           &kp N          &kp M          &kp COMMA      &kp DOT       &kp SLASH      &kp JIS_BSLH
 &none         &none          &kp ESC        &lt L_SHT TAB  &lt L_NUM SPACE &lt L_FUN BSPC  &lt L_SHT RET  &none          &none          &none
             >;
         };
 
-        // 数字と記号レイヤー
-        // @  =  +  -  ,  ;  :  .  /  *  ~  #
-        // _  1  2  3  4  5  6  7  8  9  0  %
-        // \  |  !  (  [  <  >  ]  )  ?  &  $
-        //       Esc Tab Sp Ent Bs
         num_sym_layer {
-            bindings = 
+            bindings = <
 &kp JIS_AT    &kp JIS_EQL    &kp JIS_PLUS   &kp MINUS      &kp COMMA       &kp JIS_SEMI    &kp JIS_COLON  &kp DOT        &kp SLASH      &kp JIS_ASTRK &kp JIS_TILDE  &kp JIS_HASH
 &kp JIS_UNDR  &hm LGUI N1    &hm LALT N2    &hm LCTRL N3   &hm LSHFT N4    &kp N5          &kp N6         &hm RSHFT N7   &hm RCTRL N8   &hm RALT N9   &hm RGUI N0    &kp JIS_PRCNT
 &kp JIS_BSLH  &kp JIS_PIPE   &kp JIS_EXCL   &kp JIS_LPAR   &kp JIS_LBKT    &kp JIS_LT      &kp JIS_GT     &kp JIS_RBKT   &kp JIS_RPAR   &kp JIS_QMARK &kp JIS_AMPS   &kp JIS_DLLR
@@ -116,13 +98,8 @@
             >;
         };
 
-        // ファンクションキーと記号レイヤー
-        // F1  F2  F3  F4  F5  F6  F7  F8  F9  F10  F11  F12
-        // \   |   !   (   [   <   >   ]   )   ?    &    $
-        // _   =   `   ^   {   ;   :   }   "   '    ~    #
-        //         Esc Tab Sp  Ent Bs
         fun_sym_layer {
-            bindings = 
+            bindings = <
 &kp F1        &kp F2         &kp F3         &kp F4         &kp F5          &kp F6          &kp F7         &kp F8         &kp F9         &kp F10       &kp F11        &kp F12
 &kp JIS_BSLH  &hm LGUI JIS_PIPE &hm LALT JIS_EXCL &hm LCTRL JIS_LPAR &hm LSHFT JIS_LBKT &kp JIS_LT &kp JIS_GT  &hm RSHFT JIS_RBKT &hm RCTRL JIS_RPAR &hm RALT JIS_QMARK &hm RGUI JIS_AMPS &kp JIS_DLLR
 &kp JIS_UNDR  &kp JIS_EQL    &kp JIS_GRV    &kp JIS_CARET  &kp JIS_LBRC    &kp JIS_SEMI    &kp JIS_COLON  &kp JIS_RBRC   &kp JIS_DQUOT  &kp JIS_QUOT  &kp JIS_TILDE  &kp JIS_HASH
@@ -130,13 +107,8 @@
             >;
         };
 
-        // ショートカットと矢印キーレイヤー
-        // none  none  C-Z   C-Y   none  none  Home  PgUp  ↑     PgDn  End   Pause
-        // none  C-A   C-X   C-C   C-V   none  Bs    ←    ↓     →    Del   CapsLk
-        // none  none  none  none  none  none  App   ⏮    ⏯    ⏭    Ins   ScrlLk
-        //             Esc   Tab   Sp    Ent   Bs
         shortcut_layer {
-            bindings = 
+            bindings = <
 &none         &none          &kp LC(Z)      &kp LC(Y)      &none           &none           &kp HOME       &kp PG_UP      &kp UP         &kp PG_DN     &kp END        &kp PAUSE_BREAK
 &none         &hm LGUI LC(A) &hm LALT LC(X) &hm LCTRL LC(C) &hm LSHFT LC(V) &none          &kp BSPC       &kp LEFT       &kp DOWN       &kp RIGHT     &kp DEL        &kp CAPS
 &none         &none          &none          &none          &none           &none           &kp K_APP      &kp C_PREV     &kp C_PP       &kp C_NEXT    &kp INS        &kp SLCK
@@ -144,13 +116,8 @@
             >;
         };
 
-        // 設定とマウスボタンレイヤー
-        // none  none  🔅    🔆    none  none  none  none  none  none  none  none
-        // none  🔇   🔉    🔊    PrtSc none  none  LC    HC    RC    none  none
-        // none  none  none  none  none  none  none  none  none  none  none  none
-        //             Esc   Tab   Sp    Ent   Bs
         system_layer {
-            bindings = 
+            bindings = <
 &none         &none          &kp C_BRI_DN   &kp C_BRI_UP   &none           &none           &none          &none          &none          &none         &none          &none
 &none         &hm LGUI C_MUTE &hm LALT C_VOL_DN &hm LCTRL C_VOL_UP &hm LSHFT PSCRN &none  &none          &mkp LCLK      &mkp MCLK      &mkp RCLK     &none          &none
 &none         &none          &none          &none          &none           &none           &none          &none          &none          &none         &none          &none
