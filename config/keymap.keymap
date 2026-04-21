@@ -59,6 +59,21 @@
         combo_lang2 { timeout-ms = <30>; key-positions = <14 15>; bindings = <&kp LANG2>; layers = <L_DEF L_QWE>; };
         combo_lang1 { timeout-ms = <30>; key-positions = <20 21>; bindings = <&kp LANG1>; layers = <L_DEF L_QWE>; };
 
+        // 2と3の位置で 「！」
+        combo_excl { 
+            timeout-ms = <30>; 
+            key-positions = <2 3>; 
+            bindings = <&kp JIS_EXCL>; 
+            layers = <L_DEF L_QWE>; 
+        };
+        // 8と9の位置で 「？」
+        combo_qmark { 
+            timeout-ms = <30>; 
+            key-positions = <8 9>; 
+            bindings = <&kp JIS_QMARK>; 
+            layers = <L_DEF L_QWE>; 
+        };
+
         combo_to_qwerty { timeout-ms = <60>; key-positions = <14 15 16>; bindings = <&to L_QWE>; layers = <L_DEF>; };
         combo_to_def    { timeout-ms = <60>; key-positions = <19 20 21>; bindings = <&to L_DEF>; layers = <L_QWE>; };
     };
